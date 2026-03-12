@@ -3,25 +3,7 @@ import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { format } from 'date-fns';
-
-interface Post {
-  id: number;
-  title: string;
-  slug: string;
-  content: string;
-  cover_image: string;
-  tags: string;
-  status: string;
-  featured: number;
-  created_at: string;
-}
-
-interface Settings {
-  about_text: string;
-  portfolio_url: string;
-  collaborations_url: string;
-  projects_url: string;
-}
+import { getAllPosts, getSettings, Post, Settings } from '../utils/content';
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -29,14 +11,11 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      fetch('/api/posts').then((res) => res.json()),
-      fetch('/api/settings').then((res) => res.json())
-    ]).then(([postsData, settingsData]) => {
-      setPosts(postsData);
-      setSettings(settingsData);
-      setLoading(false);
-    });
+    // Simulate async loading for smoother transitions if desired, 
+    // but we can just set it immediately since it's synchronous now.
+    setPosts(getAllPosts());
+    setSettings(getSettings());
+    setLoading(false);
   }, []);
 
   if (loading) {
@@ -47,10 +26,10 @@ export default function Home() {
     );
   }
 
-  const featuredPosts = posts.filter((p) => p.featured === 1).slice(0, 3);
-  const allBlogs = posts.filter((p) => p.featured === 0);
+  const featuredPosts = posts.filter((p) => p.featured).slice(0, 3);
+  const allBlogs = posts.filter((p) => !p.featured);
 
-  const heroPost = featuredPosts[0];
+  const heroPost = featuredPosts[0] || posts[0]; // Fallback to first post if no featured
   const sidePosts = featuredPosts.slice(1);
 
   return (

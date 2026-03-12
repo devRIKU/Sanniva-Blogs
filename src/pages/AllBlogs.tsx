@@ -3,26 +3,15 @@ import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { format } from 'date-fns';
-
-interface Post {
-  id: number;
-  title: string;
-  slug: string;
-  created_at: string;
-  tags?: string;
-}
+import { getAllPosts, Post } from '../utils/content';
 
 export default function AllBlogs() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/posts')
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-        setLoading(false);
-      });
+    setPosts(getAllPosts());
+    setLoading(false);
   }, []);
 
   if (loading) {

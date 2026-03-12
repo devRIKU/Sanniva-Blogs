@@ -3,36 +3,20 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { format } from 'date-fns';
 import { ArrowLeft } from 'lucide-react';
-
-interface Post {
-  id: number;
-  title: string;
-  slug: string;
-  content: string;
-  cover_image: string;
-  tags: string;
-  created_at: string;
-}
+import Markdown from 'react-markdown';
+import { getPostBySlug, Post as PostType } from '../utils/content';
 
 export default function Post() {
   const { slug } = useParams<{ slug: string }>();
-  const [post, setPost] = useState<Post | null>(null);
+  const [post, setPost] = useState<PostType | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`/api/posts/${slug}`)
-      .then((res) => {
-        if (!res.ok) throw new Error('Post not found');
-        return res.json();
-      })
-      .then((data) => {
-        setPost(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setPost(null);
-        setLoading(false);
-      });
+    if (slug) {
+      const foundPost = getPostBySlug(slug);
+      setPost(foundPost || null);
+    }
+    setLoading(false);
   }, [slug]);
 
   if (loading) {
@@ -105,8 +89,9 @@ export default function Post() {
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.5, delay: 0.3 }}
         className="prose prose-lg max-w-none text-[var(--text)] font-body prose-headings:font-display prose-headings:font-bold prose-headings:text-[var(--text)] prose-a:text-[var(--accent)] prose-strong:text-[var(--text)] prose-blockquote:border-[var(--accent)] prose-blockquote:text-[var(--secondary)] prose-code:text-[var(--accent)] prose-pre:bg-[var(--surface)] prose-pre:border prose-pre:border-[var(--border)]"
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      />
+      >
+        <Markdown>{post.content}</Markdown>
+      </motion.div>
     </motion.article>
   );
 }
