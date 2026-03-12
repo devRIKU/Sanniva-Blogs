@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Syne", sans-serif;
+  --font-body: "Lora", serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-dark-bg: #1A1208;
+  --color-dark-surface: #26190A;
+  --color-dark-text: #F2D98B;
+  --color-dark-accent: #E63329;
+  --color-dark-secondary: #B89A5A;
+  --color-dark-border: #3D2B0E;
+  --color-dark-btn-bg: #2A1C0A;
+
+  --color-light-bg: #F5E6C0;
+  --color-light-surface: #EDD98A;
+  --color-light-text: #1A1208;
+  --color-light-accent: #CC2A21;
+  --color-light-secondary: #5C4A1E;
+  --color-light-border: #C9A84C;
+  --color-light-btn-bg: #EDD98A;
+}
+
+@layer base {
+  :root {
+    --bg: var(--color-dark-bg);
+    --surface: var(--color-dark-surface);
+    --text: var(--color-dark-text);
+    --accent: var(--color-dark-accent);
+    --secondary: var(--color-dark-secondary);
+    --border: var(--color-dark-border);
+    --btn-bg: var(--color-dark-btn-bg);
+    --btn-text: var(--color-dark-text);
+  }
+
+  :root.light {
+    --bg: var(--color-light-bg);
+    --surface: var(--color-light-surface);
+    --text: var(--color-light-text);
+    --accent: var(--color-light-accent);
+    --secondary: var(--color-light-secondary);
+    --border: var(--color-light-border);
+    --btn-bg: var(--color-light-btn-bg);
+    --btn-text: var(--color-light-text);
+  }
+
+  body {
+    @apply bg-[var(--bg)] text-[var(--text)] font-body transition-colors duration-400 ease-in-out;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold;
+  }
+}
+
+/* Clipped Image Edge Effect */
+.clipped-edge {
+  clip-path: polygon(0 0, 100% 0, 75% 100%, 0 100%);
+}
+
+.clipped-edge-reverse {
+  clip-path: polygon(0 0, 75% 0, 100% 100%, 0 100%);
+}
+
+/* TipTap Editor Styles */
+.ProseMirror {
+  @apply min-h-[300px] outline-none p-4 bg-[var(--surface)] text-[var(--text)] rounded-md border border-[var(--border)];
+}
+
+.ProseMirror p {
+  @apply mb-4 leading-relaxed;
+}
+
+.ProseMirror h1 {
+  @apply text-3xl font-display font-bold mb-4 mt-6;
+}
+
+.ProseMirror h2 {
+  @apply text-2xl font-display font-bold mb-3 mt-5;
+}
+
+.ProseMirror h3 {
+  @apply text-xl font-display font-bold mb-2 mt-4;
+}
+
+.ProseMirror ul {
+  @apply list-disc pl-6 mb-4;
+}
+
+.ProseMirror ol {
+  @apply list-decimal pl-6 mb-4;
+}
+
+.ProseMirror blockquote {
+  @apply border-l-4 border-[var(--accent)] pl-4 italic text-[var(--secondary)] mb-4;
+}
+
+.ProseMirror a {
+  @apply text-[var(--accent)] underline underline-offset-4;
+}
+
+.ProseMirror code {
+  @apply font-mono bg-[var(--bg)] px-1 py-0.5 rounded text-sm;
+}
+
+.ProseMirror pre {
+  @apply font-mono bg-[var(--bg)] p-4 rounded-md overflow-x-auto mb-4;
+}
+
+.ProseMirror pre code {
+  @apply bg-transparent p-0;
+}
+
+.ProseMirror img {
+  @apply max-w-full h-auto rounded-md my-4;
+}

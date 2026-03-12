@@ -1,0 +1,5 @@
+{
+  "name": "Sanniva/Blogs",
+  "description": "A personal blog website with a public reader frontend and private admin backend.",
+  "requestFramePermissions": []
+}
