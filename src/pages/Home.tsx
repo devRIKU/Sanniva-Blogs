@@ -27,7 +27,7 @@ export default function Home() {
   }
 
   const featuredPosts = posts.filter((p) => p.featured).slice(0, 3);
-  const allBlogs = posts.filter((p) => !p.featured);
+  const recentPosts = posts.slice(0, 5);
 
   const heroPost = featuredPosts[0] || posts[0]; // Fallback to first post if no featured
   const sidePosts = featuredPosts.slice(1);
@@ -117,17 +117,17 @@ export default function Home() {
         )}
       </section>
 
-      {/* All Blogs Section */}
+      {/* Recent Blogs Section */}
       <section className="mb-20">
         <div className="flex items-center mb-8">
           <h2 className="text-2xl font-display font-bold uppercase tracking-widest text-[var(--text)]">
-            All Blogs
+            Recent Posts
           </h2>
           <div className="ml-4 flex-grow h-px bg-[var(--border)]"></div>
         </div>
 
         <div className="flex flex-col">
-          {allBlogs.map((post, idx) => (
+          {recentPosts.map((post, idx) => (
             <motion.div
               key={post.id}
               initial={{ opacity: 0, x: -20 }}
@@ -157,6 +157,15 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
+        
+        {/* See More Button */}
+        <Link
+          to="/all-posts"
+          className="group mt-8 flex items-center justify-center w-full py-4 px-6 bg-[var(--btn-bg)] border border-[var(--border)] rounded-xl font-display font-bold text-xl text-[var(--btn-text)] hover:bg-[var(--surface)] transition-all duration-300 shadow-sm"
+        >
+          see more
+          <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2" size={24} />
+        </Link>
       </section>
 
       {/* Beyond The Blog Section */}

@@ -10,10 +10,10 @@ export default function Header() {
     <header className="sticky top-0 z-50 backdrop-blur-md bg-[var(--bg)]/80 border-b border-[var(--border)]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <Link to="/" className="flex items-center group">
-          <span className="font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-[var(--text)] group-hover:opacity-90 transition-opacity">
+          <span className="font-display font-extrabold text-2xl sm:text-3xl tracking-tight text-[var(--text)] group-hover:opacity-90 transition-opacity">
             Sanniva
           </span>
-          <span className="font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-[var(--accent)] group-hover:opacity-90 transition-opacity">
+          <span className="font-display font-extrabold text-2xl sm:text-3xl tracking-tight text-[var(--accent)] group-hover:opacity-90 transition-opacity">
             /Blogs
           </span>
         </Link>

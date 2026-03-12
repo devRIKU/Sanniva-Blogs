@@ -8,11 +8,18 @@ import { getAllPosts, Post } from '../utils/content';
 export default function AllBlogs() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     setPosts(getAllPosts());
     setLoading(false);
   }, []);
+
+  const filteredPosts = posts.filter(post => 
+    post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (post.tags && post.tags.toLowerCase().includes(searchTerm.toLowerCase())) ||
+    post.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   if (loading) {
     return (
@@ -34,15 +41,22 @@ export default function AllBlogs() {
       </Link>
 
       <section className="mb-20">
-        <div className="flex items-center mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
           <h1 className="text-3xl font-display font-bold uppercase tracking-widest text-[var(--text)]">
             All Blogs
           </h1>
-          <div className="ml-4 flex-grow h-px bg-[var(--border)]"></div>
+          <input
+            type="text"
+            placeholder="Search posts..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="px-4 py-2 bg-[var(--surface)] border border-[var(--border)] rounded-lg font-body text-[var(--text)] focus:outline-none focus:border-[var(--accent)] transition-colors"
+          />
         </div>
+        <div className="h-px bg-[var(--border)] mb-8"></div>
 
         <div className="flex flex-col">
-          {posts.map((post, idx) => (
+          {filteredPosts.map((post, idx) => (
             <motion.div
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
@@ -72,9 +86,9 @@ export default function AllBlogs() {
             </motion.div>
           ))}
           
-          {posts.length === 0 && (
+          {filteredPosts.length === 0 && (
             <div className="py-12 text-center text-[var(--secondary)] font-body">
-              No blogs published yet.
+              No posts found matching "{searchTerm}".
             </div>
           )}
         </div>
