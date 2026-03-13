@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "last-day-before-exam.md",
+                "file": "Extras/Templates/Blog Template.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "last-day-before-exam"
+              "title": "Blog Template"
             }
           }
         ],
@@ -171,13 +171,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "last-day-before-exam.md",
+                "file": "Extras/Templates/Blog Template.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of last-day-before-exam"
+              "title": "Outline of Blog Template"
             }
           },
           {
@@ -212,8 +212,8 @@
   "active": "892396fb371ed61e",
   "lastOpenFiles": [
     "my-cousins.md",
-    "rise-of-ai-in-creativity.md",
     "last-day-before-exam.md",
+    "rise-of-ai-in-creativity.md",
     "Extras/Templates/Blog Template.md",
     "the-art-of-subtraction.md",
     "Extras/Templates",
