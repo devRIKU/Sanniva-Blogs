@@ -79,7 +79,13 @@ export default function AllBlogs() {
                     </p>
                   </div>
                   <div className="mt-2 sm:mt-0 font-mono text-sm text-[var(--secondary)] font-bold">
-                    {format(new Date(post.created_at), 'dd/MM/yy')}
+                    {(() => {
+                      try {
+                        return format(new Date(post.created_at), 'dd/MM/yy');
+                      } catch (e) {
+                        return post.created_at;
+                      }
+                    })()}
                   </div>
                 </div>
               </Link>

@@ -28,21 +28,25 @@ export function getAllPosts(): Post[] {
   const posts: Post[] = [];
 
   for (const path in postFiles) {
-    const rawContent = postFiles[path] as string;
-    const { attributes, body } = frontMatter<any>(rawContent);
+    try {
+      const rawContent = postFiles[path] as string;
+      const { attributes, body } = frontMatter<any>(rawContent);
 
-    if (attributes.status === 'Published') {
-      posts.push({
-        id: attributes.slug || path,
-        title: attributes.title || 'Untitled',
-        slug: attributes.slug || path.replace('../content/posts/', '').replace('.md', ''),
-        created_at: attributes.date || new Date().toISOString(),
-        content: body,
-        cover_image: attributes.cover_image,
-        tags: attributes.tags,
-        status: attributes.status,
-        featured: attributes.featured || false,
-      });
+      if (attributes.status === 'Published') {
+        posts.push({
+          id: String(attributes.slug || path),
+          title: String(attributes.title || 'Untitled'),
+          slug: String(attributes.slug || path.replace('../content/posts/', '').replace('.md', '')),
+          created_at: String(attributes.date || new Date().toISOString()),
+          content: String(body || ''),
+          cover_image: String(attributes.cover_image || ''),
+          tags: Array.isArray(attributes.tags) ? attributes.tags.join(', ') : String(attributes.tags || ''),
+          status: String(attributes.status || ''),
+          featured: attributes.featured || false,
+        });
+      }
+    } catch (error) {
+      console.error(`Error parsing markdown file ${path}:`, error);
     }
   }
 

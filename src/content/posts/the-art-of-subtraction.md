@@ -1,13 +1,10 @@
 ---
-title: The Art of Subtraction
-slug: the-art-of-subtraction
-date: 2026-03-12
-cover_image: https://picsum.photos/seed/minimal/800/600
-tags:
-  - minimalism
-  - lifestyle
-  - design
-status: Published
+title: "The Art of Subtraction"
+slug: "the-art-of-subtraction"
+date: "2026-03-12"
+cover_image: "https://picsum.photos/seed/minimal/800/600"
+tags: "minimalism, lifestyle, design"
+status: "Published"
 featured: true
 ---
 

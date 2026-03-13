@@ -74,7 +74,15 @@ export default function Post() {
           {post.title}
         </h1>
         <div className="flex items-center justify-between border-y border-[var(--border)] py-4 font-mono text-sm text-[var(--secondary)] uppercase tracking-wider">
-          <div>{format(new Date(post.created_at), 'MMMM dd, yyyy')}</div>
+          <div>
+            {(() => {
+              try {
+                return format(new Date(post.created_at), 'MMMM dd, yyyy');
+              } catch (e) {
+                return post.created_at;
+              }
+            })()}
+          </div>
           {post.tags && <div>{post.tags.split(',').map(t => `#${t.trim()}`).join(' ')}</div>}
         </div>
       </motion.header>

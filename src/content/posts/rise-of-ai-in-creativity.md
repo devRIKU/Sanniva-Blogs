@@ -1,14 +1,11 @@
 ---
-title: The Rise of AI in Creativity
-slug: rise-of-ai-in-creativity
-date: 2026-03-11
-cover_image: https://picsum.photos/seed/ai/800/600
-tags:
-  - ai
-  - creativity
-  - future
-status: Published
-featured: true
+title: "The Rise of AI in Creativity"
+slug: "rise-of-ai-in-creativity"
+date: "2026-03-11"
+cover_image: "https://picsum.photos/seed/ai/800/600"
+tags: "ai, creativity, future"
+status: "Published"
+featured: false
 ---
 
 Artificial intelligence is no longer just a sci-fi concept. It is a tool that creatives are using every day to enhance their workflows and explore new possibilities.
