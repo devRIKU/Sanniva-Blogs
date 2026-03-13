@@ -1,11 +1,10 @@
 ---
 title: Your Awesome Blog Post
 slug: your-awesome-blog-post
-date: "{{date}}"
+date: "2026-03-13"
 status: Published
 featured: true
 tags: design, tech, life
 cover_image: https://picsum.photos/seed/awesome/800/400
 ---
-
-Your actual blog content starts here......
+So... after my exam 
