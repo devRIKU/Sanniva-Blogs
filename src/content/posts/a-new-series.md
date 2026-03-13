@@ -1,6 +1,6 @@
 ---
 title: A New Series
-slug: your-awesome-blog-post
+slug: stranger-things
 date: 2026-03-13
 status: Published
 featured: true

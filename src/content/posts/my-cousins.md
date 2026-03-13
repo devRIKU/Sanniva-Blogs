@@ -1,11 +1,12 @@
 ---
 title: My Cousins
 slug: my-cousins
-date: 2026-03-13
+date: 2026-02-17
 status: Published
 featured: true
 tags:
   - thoughts
+  - lifestyle
 cover_image: https://picsum.photos/seed/awesome/800/400
 ---
 
