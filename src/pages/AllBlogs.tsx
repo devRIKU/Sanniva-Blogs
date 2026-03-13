@@ -23,8 +23,28 @@ export default function AllBlogs() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-[var(--text)] font-display font-bold text-2xl">Loading...</div>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-pulse">
+        <div className="h-4 w-32 bg-[var(--border)] rounded mb-8"></div>
+
+        <section className="mb-20">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+            <div className="h-8 w-40 bg-[var(--border)] rounded"></div>
+            <div className="h-10 w-full sm:w-64 bg-[var(--border)] rounded-lg"></div>
+          </div>
+          <div className="h-px bg-[var(--border)] mb-8"></div>
+
+          <div className="flex flex-col">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="py-6 border-b border-dashed border-[var(--border)] flex flex-col sm:flex-row sm:items-center justify-between">
+                <div className="w-full sm:w-2/3">
+                  <div className="h-6 w-3/4 bg-[var(--border)] rounded mb-2"></div>
+                  <div className="h-3 w-1/4 bg-[var(--border)] rounded"></div>
+                </div>
+                <div className="mt-2 sm:mt-0 h-4 w-16 bg-[var(--border)] rounded"></div>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     );
   }

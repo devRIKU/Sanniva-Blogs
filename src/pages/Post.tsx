@@ -4,6 +4,8 @@ import { motion } from 'motion/react';
 import { format } from 'date-fns';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Markdown from 'react-markdown';
+import remarkBreaks from 'remark-breaks';
+import remarkGfm from 'remark-gfm';
 import { getPostBySlug, getAllPosts, Post as PostType } from '../utils/content';
 
 export default function Post() {
@@ -111,7 +113,7 @@ export default function Post() {
         transition={{ duration: 0.5, delay: 0.3 }}
         className="prose prose-lg max-w-none text-[var(--text)] font-body prose-headings:font-display prose-headings:font-bold prose-headings:text-[var(--text)] prose-a:text-[var(--accent)] prose-strong:text-[var(--text)] prose-blockquote:border-[var(--accent)] prose-blockquote:text-[var(--secondary)] prose-code:text-[var(--accent)] prose-pre:bg-[var(--surface)] prose-pre:border prose-pre:border-[var(--border)]"
       >
-        <Markdown>{post.content}</Markdown>
+        <Markdown remarkPlugins={[remarkBreaks, remarkGfm]}>{post.content}</Markdown>
       </motion.div>
 
       {/* Navigation Buttons */}

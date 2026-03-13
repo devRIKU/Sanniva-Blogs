@@ -6,3 +6,11 @@ coverage/
 *.log
 .env*
 !.env.example
+
+/src/content/posts/.gitignore
+/src/pages/AllBlogs.tsx
+/src/pages/Home.tsx
+/src/index.css
+/package-lock.json
+/package.json
+/src/pages/Post.tsx

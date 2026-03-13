@@ -20,8 +20,74 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-[var(--text)] font-display font-bold text-2xl">Loading...</div>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-pulse">
+        {/* Welcome Section Skeleton */}
+        <section className="mb-20">
+          <div className="flex items-center mb-8">
+            <div className="h-8 w-40 bg-[var(--border)] rounded"></div>
+            <div className="ml-4 flex-grow h-px bg-[var(--border)]"></div>
+          </div>
+          <div className="py-4">
+            <div className="h-4 w-full bg-[var(--border)] rounded mb-3"></div>
+            <div className="h-4 w-5/6 bg-[var(--border)] rounded mb-3"></div>
+            <div className="h-4 w-4/6 bg-[var(--border)] rounded mb-6"></div>
+            <div>
+              <div className="h-6 w-16 bg-[var(--border)] rounded mb-3"></div>
+              <div className="h-4 w-20 bg-[var(--border)] rounded"></div>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Blogs Section Skeleton */}
+        <section className="mb-20">
+          <div className="flex items-center mb-8">
+            <div className="h-8 w-48 bg-[var(--border)] rounded"></div>
+            <div className="ml-4 flex-grow h-px bg-[var(--border)]"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            {/* Hero Card Skeleton */}
+            <div className="md:col-span-7 rounded-xl bg-[var(--surface)] border border-[var(--border)] overflow-hidden">
+              <div className="aspect-[4/3] w-full bg-[var(--border)]"></div>
+              <div className="p-6">
+                <div className="h-8 w-3/4 bg-[var(--border)] rounded mb-2"></div>
+                <div className="h-4 w-full bg-[var(--border)] rounded mb-1"></div>
+                <div className="h-4 w-5/6 bg-[var(--border)] rounded"></div>
+              </div>
+            </div>
+            {/* Side Cards Skeleton */}
+            <div className="md:col-span-5 flex flex-col gap-6">
+              {[1, 2].map((i) => (
+                <div key={i} className="flex flex-col sm:flex-row bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden">
+                  <div className="w-full sm:w-2/5 aspect-video sm:aspect-square bg-[var(--border)]"></div>
+                  <div className="w-full sm:w-3/5 p-4 flex flex-col justify-center">
+                    <div className="h-6 w-full bg-[var(--border)] rounded mb-2"></div>
+                    <div className="h-6 w-2/3 bg-[var(--border)] rounded"></div>
+                  </div>
+                </div>
+              ))}
+              <div className="mt-auto py-4 px-6 bg-[var(--surface)] border border-[var(--border)] rounded-xl h-14"></div>
+            </div>
+          </div>
+        </section>
+
+        {/* Recent Blogs Section Skeleton */}
+        <section className="mb-20">
+          <div className="flex items-center mb-8">
+            <div className="h-8 w-40 bg-[var(--border)] rounded"></div>
+            <div className="ml-4 flex-grow h-px bg-[var(--border)]"></div>
+          </div>
+          <div className="flex flex-col">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="py-6 border-b border-dashed border-[var(--border)] flex flex-col sm:flex-row sm:items-center justify-between">
+                <div className="w-full sm:w-2/3">
+                  <div className="h-6 w-3/4 bg-[var(--border)] rounded mb-2"></div>
+                  <div className="h-3 w-1/4 bg-[var(--border)] rounded"></div>
+                </div>
+                <div className="mt-2 sm:mt-0 h-4 w-16 bg-[var(--border)] rounded"></div>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     );
   }
