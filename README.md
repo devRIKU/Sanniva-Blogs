@@ -1,20 +1,23 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Sanniva/Blogs
 
-# Run and deploy your AI Studio app
+Welcome to my personal blog! I'm a 7th grader at Techno India Group Public School who’s way too into coding and all things techy.
 
-This contains everything you need to run your app locally.
+## Tech Stack
+- React 19
+- Tailwind CSS
+- Vite
+- Markdown (front-matter)
 
-View your app in AI Studio: https://ai.studio/apps/c7040fa3-bdc4-4a54-8d7c-4f8551a567b9
+## Features
+- Dark/Light mode
+- Featured posts
+- Recent posts
+- Responsive design
 
-## Run Locally
+## Getting Started
+1. Clone the repository.
+2. Install dependencies: `npm install`
+3. Run the development server: `npm run dev`
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## License
+Apache-2.0
