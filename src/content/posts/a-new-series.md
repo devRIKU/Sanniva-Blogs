@@ -7,7 +7,7 @@ featured: true
 tags:
   - thoughts
   - movie
-cover_image: https://picsum.photos/seed/awesome/800/400
+cover_image: https://picsum.photos/seed/strange/800/400
 ---
 > First of all, I want to say that if you haven't watched *Stranger Things*, please watch it (or ask Gemini or Claude to summarize the story). With that being said...
 
