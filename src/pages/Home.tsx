@@ -54,7 +54,7 @@ export default function Home() {
           <div>
             <h3 className="text-xl font-display font-bold text-[var(--text)] mb-3">Links</h3>
             <a
-              href="https://github.com/sannivachatterjee25"
+              href="https://github.com/devRIKU"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center text-[var(--accent)] hover:opacity-80 transition-opacity font-bold underline decoration-[var(--accent)] underline-offset-4"
