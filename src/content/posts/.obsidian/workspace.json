@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "rise-of-ai-in-creativity.md",
+                "file": "last-day-before-exam.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "rise-of-ai-in-creativity"
+              "title": "last-day-before-exam"
             }
           }
         ],
@@ -185,17 +185,17 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "rise-of-ai-in-creativity.md",
+                "file": "last-day-before-exam.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of rise-of-ai-in-creativity"
+              "title": "Outline of last-day-before-exam"
             }
           },
           {
-            "id": "86ea95c2154b69db",
+            "id": "07e965bd65c61709",
             "type": "leaf",
             "state": {
               "type": "git-view",
@@ -209,7 +209,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 409.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -223,14 +223,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "69e21bd4c723c35c",
+  "active": "479d5eaef8623887",
   "lastOpenFiles": [
+    "a-new-series.md",
+    "New Text Document.txt",
+    "rise-of-ai-in-creativity.md",
     "my-cousins.md",
     "last-day-before-exam.md",
-    "a-new-series.md",
     "Extras/Templates/Blog Template.md",
     "conflict-files-obsidian-git.md",
-    "rise-of-ai-in-creativity.md",
     "the-art-of-subtraction.md",
     "Extras/Templates",
     "Extras",
