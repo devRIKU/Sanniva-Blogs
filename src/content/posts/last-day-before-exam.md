@@ -7,7 +7,7 @@ featured: true
 tags:
   - thoughts
   - lifestyle
-cover_image: https://picsum.photos/seed/exam/800/400
+cover_image: https://picsum.photos/seed/awesome/800/400
 ---
 
 Today marks the final day before the dreaded final exams begin. I see this as my last taste of freedom before I’m fully locked into my studies. Tomorrow starts with my A.I. exam, and with AI being squeezed into every corner of the internet, I bet everyone will get full marks. Even Zournel, the very website and app where I’m writing this, was made by AI and is packed with AI features.

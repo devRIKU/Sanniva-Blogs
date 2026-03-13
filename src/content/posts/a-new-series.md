@@ -7,7 +7,7 @@ featured: true
 tags:
   - thoughts
   - movie
-cover_image: https://picsum.photos/seed/strange/800/400
+cover_image: https://picsum.photos/seed/awesome/800/400
 ---
 > First of all, I want to say that if you haven't watched *Stranger Things*, please watch it (or ask Gemini or Claude to summarize the story). With that being said...
 
@@ -19,4 +19,4 @@ I feel like Eleven also has a really sad story, as being isolated is not good. S
 
 With the story portion concluded, I’d like to move on to my favorite pastime: overanalyzing inconsistencies. I scrutinized every detail they included, wondering, for instance, if Visa and Mastercard existed in the 1980s (apparently, they did). I also noticed their heavy reliance on radios, which led me to question whether radio signals can actually penetrate to a depth of 800 meters (which they also can)..
 
-`I just want to say that this Blog is not Finished As i watch more of the Series or Just Get more thoughts i will add it here.`
+%% I just want to say that this Blog is not Finished As i watch more of the Series or Just Get more thoughts i will add it here.  %%
