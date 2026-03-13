@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "last-day-before-exam.md",
+                "file": "my-cousins.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "last-day-before-exam"
+              "title": "my-cousins"
             }
           }
         ],
@@ -185,13 +185,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "last-day-before-exam.md",
+                "file": "my-cousins.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of last-day-before-exam"
+              "title": "Outline of my-cousins"
             }
           },
           {
@@ -223,7 +223,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3b7cf24a4a6ba8bd",
+  "active": "acecb23e68facfb2",
   "lastOpenFiles": [
     "last-day-before-exam.md",
     "my-cousins.md",
