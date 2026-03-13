@@ -39,6 +39,32 @@ export default function Home() {
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
     >
+      {/* Welcome Section */}
+      <section className="mb-20">
+        <div className="flex items-center mb-8">
+          <h1 className="text-3xl font-display font-bold uppercase tracking-widest text-[var(--text)]">
+            Welcome 🎉
+          </h1>
+          <div className="ml-4 flex-grow h-px bg-[var(--border)]"></div>
+        </div>
+        <div className="py-4">
+          <p className="font-body text-lg sm:text-xl text-[var(--text)] leading-relaxed mb-6">
+            Hey there! I’m a 7th grader at Techno India Group Public School who’s way too into coding and all things techy. I’m not gonna lie—I don’t feel like a genius, but somehow I manage to pull off good grades (magic, maybe?).
+          </p>
+          <div>
+            <h3 className="text-xl font-display font-bold text-[var(--text)] mb-3">Links</h3>
+            <a
+              href="https://github.com/sannivachatterjee25"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-[var(--accent)] hover:opacity-80 transition-opacity font-bold underline decoration-[var(--accent)] underline-offset-4"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Blogs Section */}
       <section className="mb-20">
         <div className="flex items-center mb-8">

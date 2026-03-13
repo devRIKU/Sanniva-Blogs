@@ -17,7 +17,13 @@ export default function Header() {
             /Blogs
           </span>
         </Link>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-3 sm:space-x-6">
+          <Link 
+            to="/all-posts" 
+            className="font-display font-bold text-sm sm:text-base text-[var(--text)] hover:text-[var(--accent)] transition-colors"
+          >
+            All Posts
+          </Link>
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-[var(--surface)] transition-colors"

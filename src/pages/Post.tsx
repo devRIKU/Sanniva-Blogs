@@ -2,19 +2,32 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { format } from 'date-fns';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Markdown from 'react-markdown';
-import { getPostBySlug, Post as PostType } from '../utils/content';
+import { getPostBySlug, getAllPosts, Post as PostType } from '../utils/content';
 
 export default function Post() {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<PostType | null>(null);
+  const [prevPost, setPrevPost] = useState<PostType | null>(null);
+  const [nextPost, setNextPost] = useState<PostType | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (slug) {
-      const foundPost = getPostBySlug(slug);
-      setPost(foundPost || null);
+      const allPosts = getAllPosts();
+      const currentIndex = allPosts.findIndex(p => p.slug === slug);
+      
+      if (currentIndex !== -1) {
+        setPost(allPosts[currentIndex]);
+        // Posts are sorted newest first. 
+        // "Previous" (older) is at currentIndex + 1
+        // "Next" (newer) is at currentIndex - 1
+        setPrevPost(currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null);
+        setNextPost(currentIndex > 0 ? allPosts[currentIndex - 1] : null);
+      } else {
+        setPost(null);
+      }
     }
     setLoading(false);
   }, [slug]);
@@ -91,6 +104,47 @@ export default function Post() {
         className="prose prose-lg max-w-none text-[var(--text)] font-body prose-headings:font-display prose-headings:font-bold prose-headings:text-[var(--text)] prose-a:text-[var(--accent)] prose-strong:text-[var(--text)] prose-blockquote:border-[var(--accent)] prose-blockquote:text-[var(--secondary)] prose-code:text-[var(--accent)] prose-pre:bg-[var(--surface)] prose-pre:border prose-pre:border-[var(--border)]"
       >
         <Markdown>{post.content}</Markdown>
+      </motion.div>
+
+      {/* Navigation Buttons */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="mt-16 pt-8 border-t border-[var(--border)] flex flex-col sm:flex-row justify-between items-stretch gap-4"
+      >
+        {prevPost ? (
+          <Link
+            to={`/post/${prevPost.slug}`}
+            className="flex-1 group flex flex-col items-start p-4 rounded-xl border border-[var(--border)] hover:border-[var(--accent)] bg-[var(--surface)] hover:bg-[var(--bg)] transition-all duration-300"
+          >
+            <span className="text-[var(--secondary)] font-mono text-xs uppercase tracking-wider mb-2 flex items-center">
+              <ArrowLeft className="mr-1" size={14} /> Previous Post
+            </span>
+            <span className="text-[var(--text)] font-display font-bold text-lg group-hover:text-[var(--accent)] transition-colors line-clamp-2">
+              {prevPost.title}
+            </span>
+          </Link>
+        ) : (
+          <div className="flex-1"></div>
+        )}
+
+        {nextPost ? (
+          <Link
+            to={`/post/${nextPost.slug}`}
+            className="flex-1 group flex flex-col items-end text-right p-4 rounded-xl border border-[var(--border)] hover:border-[var(--accent)] bg-[var(--surface)] hover:bg-[var(--bg)] transition-all duration-300"
+          >
+            <span className="text-[var(--secondary)] font-mono text-xs uppercase tracking-wider mb-2 flex items-center">
+              Next Post <ArrowRight className="ml-1" size={14} />
+            </span>
+            <span className="text-[var(--text)] font-display font-bold text-lg group-hover:text-[var(--accent)] transition-colors line-clamp-2">
+              {nextPost.title}
+            </span>
+          </Link>
+        ) : (
+          <div className="flex-1"></div>
+        )}
       </motion.div>
     </motion.article>
   );
