@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "a-new-series.md",
+                "file": "my-cousins.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "a-new-series"
+              "title": "my-cousins"
             }
           }
         ],
@@ -185,13 +185,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "a-new-series.md",
+                "file": "my-cousins.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of a-new-series"
+              "title": "Outline of my-cousins"
             }
           },
           {
@@ -236,9 +236,9 @@
   },
   "active": "69e21bd4c723c35c",
   "lastOpenFiles": [
-    "my-cousins.md",
     "last-day-before-exam.md",
     "a-new-series.md",
+    "my-cousins.md",
     "the-art-of-subtraction.md",
     "rise-of-ai-in-creativity.md",
     "copilot/copilot-custom-prompts/Clip Web Page.md",

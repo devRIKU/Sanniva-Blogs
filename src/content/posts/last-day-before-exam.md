@@ -7,7 +7,7 @@ featured: true
 tags:
   - thoughts
   - lifestyle
-cover_image: https://picsum.photos/seed/awesome/800/400
+cover_image: https://picsum.photos/seed/exam/800/400
 ---
 
 

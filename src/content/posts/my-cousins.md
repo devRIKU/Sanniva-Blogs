@@ -7,7 +7,7 @@ featured: true
 tags:
   - thoughts
   - lifestyle
-cover_image: https://picsum.photos/seed/awesome/800/400
+cover_image: https://picsum.photos/seed/cousins/800/400
 ---
 
 Ever since I was born—which wasn’t actually that long ago, to be honest—I’ve been surrounded by my cousins. My happiest memories are all tied to them; they truly mean the world to me. My older brother has also been my idol since childhood. His knowledge of computers, and just about everything else, makes him incredibly cool. He even taught me about Windows and C++ before I even knew what algebra was! He’s in college now, and while we catch up over video calls sometimes, I always look forward to the moments he comes home to visit. 😊
