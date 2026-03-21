@@ -1,25 +1,7 @@
----
-title: A New Series
-slug: stranger-things
-date: 2026-03-13
-status: Published
-featured: true
-tags:
-  - thoughts
-  - movie
-cover_image: https://picsum.photos/seed/strange/800/400
----
-> First of all, I want to say that if you haven't watched *Stranger Things*, please watch it (or ask Gemini or Claude to summarize the story). With that being said...
-
-So… after my exam, I had literally nothing to do and was getting so bored. I decided I should watch a movie… a good use for the new TV, I thought. After seeing almost every YouTuber rant about *Stranger Things’* ending when I searched “Best Show to Watch,” I thought, well, let’s give this a try… and I was hooked.
-
-I found the story really interesting, and for the first time, I liked the characters, the soundtrack, and the story itself. The actors portrayed the characters really well. I especially like the characters Eleven, Mike, and Will. They are mostly the center of the story, but Max, Lucas, and Steve are a close second. I am currently on Season 4, Episode 1. It feels like it was so long ago that I watched Season 1, but I literally finished it about five days ago. Time doesn't fly… This series seems to be the only one after *Harry Potter* that I like this much. I found Mike to be very relatable (at least I did for the first few episodes). But then I started to feel very sorry for him; he cared for El so much (he even let her live in his basement), yet he is the one who loses her every season. I felt really angry at Hopper for some time, but at the end of Season 3, Hopper's speech made me so sad (it was a very bittersweet moment).
-
+So… after my exam, I had literally nothing to do and was getting so bored. I decided I should watch a movie… a good use for the new TV, I thought. After seeing almost every YouTuber rant about Stranger Things’ ending when I searched “Best Show to Watch,” I thought, well, let’s give this a try… and I was hooked.
+I found the story really interesting, and for the first time, I liked the characters, the soundtrack, and the story itself. The actors portrayed the characters really well. I especially like the characters Eleven, Mike, and Will. They are mostly the center of the story, but Max, Lucas, and Steve are a close second. I am currently on Season 4, Episode 1. It feels like it was so long ago that I watched Season 1, but I literally finished it about five days ago. Time doesn't fly… This series seems to be the only one after Harry Potter that I like this much. I found Mike to be very relatable (at least I did for the first few episodes). But then I started to feel very sorry for him; he cared for El so much (he even let her live in his basement), yet he is the one who loses her every season. I felt really angry at Hopper for some time, but at the end of Season 3, Hopper's speech made me so sad (it was a very bittersweet moment).
 I feel like Eleven also has a really sad story, as being isolated is not good. She never got to enjoy her childhood, was restricted in her teens, and had the responsibility of the whole world on her shoulders. Max seemed bad at first, but had a glow-up in Season 3, with Eleven and Max being absolute besties in the series (they even spied on the boys using El's powers).
+With the story portion concluded, I’d like to move on to my favorite pastime: overanalyzing inconsistencies. I scrutinized every detail they included, wondering, for instance, if Visa and Mastercard existed in the 1980s (apparently, they did). I also noticed their heavy reliance on radios, which led me to question whether radio signals can actually penetrate to a depth of 800 meters (which they also can).
 
-With the story portion concluded, I’d like to move on to my favorite pastime: overanalyzing inconsistencies. I scrutinized every detail they included, wondering, for instance, if Visa and Mastercard existed in the 1980s (apparently, they did). I also noticed their heavy reliance on radios, which led me to question whether radio signals can actually penetrate to a depth of 800 meters (which they also can)..
-
-Update: 
-I just Finished the Season 4 and it was really good. The threat feels Much bigger. Hawkins is ripped apart (literally). This season also Separated the Entire Team giving each member its own chance to shine (apart from Mike, Will and Jonathan). Eleven Begins the Season with Being Bullied and Ends it with Beating Vecna the glow up is crazy. Also we learn about [[Vecna]]'s Past and How Eleven Banished him to the Dimension X (or Hellscape As One/Henry/Vecna calls it).
-
-***I just want to say that this Blog is not Finished As i watch more of the Series or Just Get more thoughts i will add it here.*** 
+Season 4 just finished and it was a whole vibe. The threat felt significantly bigger. Hawkins is legit torn up. This season also went and separated the entire crew, giving each member their time to pop off (besides Mike, Will, and Jonathan, unfortunately). El's journey from being bullied to absolutely crushing Vecna is a wild glow-up. We also get the backstory on Vecna and how El banished him to Dimension X (or the Hellscape, as One/Henry/Vecna calls it).
+I just want to say that this Blog is not Finished As i watch more of the Series or Just Get more thoughts i will add it here. 
