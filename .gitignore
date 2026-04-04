@@ -11,10 +11,8 @@ coverage/
 src/content/posts/*
 !src/content/posts/Extras/
 
-# Ignore Obsidian settings
+# Ignore Obsidian settings and plugins
 .obsidian/
-
-/src/content/posts/my-cousins.md
-/src/content/posts/last-day-before-exam.md
-/src/content/posts/my-cousins.md
-/src/content/posts/last-day-before-exam.md
+.copilot/
+copilot/
+.trash/
