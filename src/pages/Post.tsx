@@ -25,9 +25,9 @@ export default function Post() {
         const currentPost = allPosts[currentIndex];
         setPost(currentPost);
         
-        // Preprocess content for Obsidian images
+        // Preprocess content for Obsidian images and links
         const content = currentPost.content
-          // Replace Obsidian wikilinks: ![[filename.png]] or ![[filename.png|100]]
+          // Replace Obsidian image wikilinks: ![[filename.png]] or ![[filename.png|100]]
           .replace(/!\[\[([^\]]+)\]\]/g, (match, p1) => {
             const parts = p1.split('|');
             const filename = parts[0].trim();
@@ -37,6 +37,21 @@ export default function Post() {
           // Replace standard markdown images: ![alt](filename.png)
           .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, filename) => {
             return `![${alt}](${getImageUrl(filename)})`;
+          })
+          // Replace Obsidian page wikilinks: [[Page Name]] or [[Page Name|Display Text]]
+          .replace(/(?<!!)\[\[([^\]]+)\]\]/g, (match, p1) => {
+            const parts = p1.split('|');
+            const target = parts[0].trim();
+            const display = parts.length > 1 ? parts[1].trim() : target;
+            
+            // If it looks like a URL, link directly to it
+            if (target.startsWith('http://') || target.startsWith('https://')) {
+              return `[${display}](${target})`;
+            }
+            
+            // Otherwise, assume it's an internal post link and convert to slug
+            const slug = target.toLowerCase().replace(/\s+/g, '-');
+            return `[${display}](/post/${slug})`;
           });
           
         setProcessedContent(content);
@@ -146,6 +161,13 @@ export default function Post() {
                   className="rounded-md my-4"
                 />
               );
+            },
+            a: ({node, ...props}) => {
+              const isInternal = props.href?.startsWith('/');
+              if (isInternal) {
+                return <Link to={props.href || ''} {...props} />;
+              }
+              return <a target="_blank" rel="noopener noreferrer" {...props} />;
             }
           }}
         >
