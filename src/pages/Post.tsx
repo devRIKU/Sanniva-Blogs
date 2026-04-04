@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Markdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
-import { getPostBySlug, getAllPosts, Post as PostType } from '../utils/content';
+import { getPostBySlug, getAllPosts, Post as PostType, getImageUrl } from '../utils/content';
 
 export default function Post() {
   const { slug } = useParams<{ slug: string }>();
@@ -14,6 +14,7 @@ export default function Post() {
   const [prevPost, setPrevPost] = useState<PostType | null>(null);
   const [nextPost, setNextPost] = useState<PostType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [processedContent, setProcessedContent] = useState('');
 
   useEffect(() => {
     if (slug) {
@@ -21,7 +22,25 @@ export default function Post() {
       const currentIndex = allPosts.findIndex(p => p.slug === slug);
       
       if (currentIndex !== -1) {
-        setPost(allPosts[currentIndex]);
+        const currentPost = allPosts[currentIndex];
+        setPost(currentPost);
+        
+        // Preprocess content for Obsidian images
+        const content = currentPost.content
+          // Replace Obsidian wikilinks: ![[filename.png]] or ![[filename.png|100]]
+          .replace(/!\[\[([^\]]+)\]\]/g, (match, p1) => {
+            const parts = p1.split('|');
+            const filename = parts[0].trim();
+            const alt = parts.length > 1 ? parts[1].trim() : filename;
+            return `![${alt}](${getImageUrl(filename)})`;
+          })
+          // Replace standard markdown images: ![alt](filename.png)
+          .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, filename) => {
+            return `![${alt}](${getImageUrl(filename)})`;
+          });
+          
+        setProcessedContent(content);
+
         // Posts are sorted newest first. 
         // "Previous" (older) is at currentIndex + 1
         // "Next" (newer) is at currentIndex - 1
@@ -113,7 +132,25 @@ export default function Post() {
         transition={{ duration: 0.5, delay: 0.3 }}
         className="prose prose-lg max-w-none text-[var(--text)] font-body prose-headings:font-display prose-headings:font-bold prose-headings:text-[var(--text)] prose-a:text-[var(--accent)] prose-strong:text-[var(--text)] prose-blockquote:border-[var(--accent)] prose-blockquote:text-[var(--secondary)] prose-code:text-[var(--accent)] prose-pre:bg-[var(--surface)] prose-pre:border prose-pre:border-[var(--border)]"
       >
-        <Markdown remarkPlugins={[remarkBreaks, remarkGfm]}>{post.content}</Markdown>
+        <Markdown 
+          remarkPlugins={[remarkBreaks, remarkGfm]}
+          components={{
+            img: ({node, ...props}) => {
+              // Check if alt text is a number (width) from Obsidian like ![[image.png|300]]
+              const width = props.alt && !isNaN(Number(props.alt)) ? props.alt : undefined;
+              return (
+                <img 
+                  {...props} 
+                  width={width} 
+                  style={width ? { width: `${width}px`, maxWidth: '100%', height: 'auto' } : {}} 
+                  className="rounded-md my-4"
+                />
+              );
+            }
+          }}
+        >
+          {processedContent}
+        </Markdown>
       </motion.div>
 
       {/* Navigation Buttons */}

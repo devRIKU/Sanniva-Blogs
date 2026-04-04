@@ -76,6 +76,7 @@ export default function Home() {
             <div className="h-8 w-40 bg-[var(--border)] rounded"></div>
             <div className="ml-4 flex-grow h-px bg-[var(--border)]"></div>
           </div>
+          <div className="h-4 w-3/4 bg-[var(--border)] rounded mb-8 -mt-4"></div>
           <div className="flex flex-col">
             {[1, 2, 3].map((i) => (
               <div key={i} className="py-6 border-b border-dashed border-[var(--border)] flex flex-col sm:flex-row sm:items-center justify-between">
@@ -217,6 +218,9 @@ export default function Home() {
           </h2>
           <div className="ml-4 flex-grow h-px bg-[var(--border)]"></div>
         </div>
+        <p className="font-body text-[var(--secondary)] mb-8 -mt-4">
+          A collection of my most recent thoughts and stories, fresh from the keyboard.
+        </p>
 
         <div className="flex flex-col">
           {recentPosts.map((post, idx) => (

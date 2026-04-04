@@ -6,3 +6,15 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Ignore blog posts but keep Extras
+src/content/posts/*
+!src/content/posts/Extras/
+
+# Ignore Obsidian settings
+.obsidian/
+
+/src/content/posts/my-cousins.md
+/src/content/posts/last-day-before-exam.md
+/src/content/posts/my-cousins.md
+/src/content/posts/last-day-before-exam.md

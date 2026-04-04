@@ -22,7 +22,26 @@ export interface Settings {
 }
 
 // Load all markdown files from the content/posts directory
-const postFiles = import.meta.glob('../content/posts/*.md', { query: '?raw', import: 'default', eager: true });
+const postFiles = import.meta.glob('../content/posts/**/*.md', { query: '?raw', import: 'default', eager: true });
+const imageFiles = import.meta.glob('../content/posts/**/*.{png,jpg,jpeg,gif,svg,webp}', { query: '?url', import: 'default', eager: true });
+
+export function getImageUrl(filename: string): string {
+  // If it's an external URL, return as is
+  if (filename.startsWith('http://') || filename.startsWith('https://')) {
+    return filename;
+  }
+  
+  // Find the image in the imported files
+  const normalizedFilename = filename.replace(/^\//, ''); // Remove leading slash if any
+  for (const path in imageFiles) {
+    if (path.endsWith(normalizedFilename)) {
+      return imageFiles[path] as string;
+    }
+  }
+  
+  // Fallback to the original filename if not found
+  return filename;
+}
 
 export function getAllPosts(): Post[] {
   const posts: Post[] = [];
