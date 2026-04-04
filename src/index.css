@@ -65,6 +65,13 @@
   clip-path: polygon(0 0, 75% 0, 100% 100%, 0 100%);
 }
 
+/* Mimic Obsidian paragraph spacing for line breaks */
+.prose p br {
+  display: block;
+  content: "";
+  margin-top: 1.25em;
+}
+
 /* TipTap Editor Styles */
 .ProseMirror {
   @apply min-h-[300px] outline-none p-4 bg-[var(--surface)] text-[var(--text)] rounded-md border border-[var(--border)];
