@@ -21,13 +21,8 @@ export interface Settings {
   projects_url: string;
 }
 
-// Load all markdown files from the content/posts directory, excluding Extras
-const postFiles = import.meta.glob('../content/posts/**/*.md', { 
-  query: '?raw', 
-  import: 'default', 
-  eager: true,
-  ignore: ['../content/posts/Extras/**']
-});
+// Load all markdown files from the content/posts directory
+const postFiles = import.meta.glob('../content/posts/**/*.md', { query: '?raw', import: 'default', eager: true });
 const imageFiles = import.meta.glob('../content/posts/**/*.{png,jpg,jpeg,gif,svg,webp}', { query: '?url', import: 'default', eager: true });
 
 export function getImageUrl(filename: string): string {
