@@ -14,7 +14,7 @@ At the low-low age of six, I was introduced to this little series of books/films
 I even recently made a harry potter wand made of actual wood i got from a tree!!!
 
 I have found the golden trio (Harry, Ron and Hermione) always really Fascinating
-Hermione was probably the first time who told me that you don't need to be strong to fight. Hermione's Character of being always surrounded by books and her eagerness to learn so much was very relatable
+Hermione was probably the first time who told me that you don't need to be strong to fight. Hermione's Character of being always surrounded by books and her eagerness to learn so much was very relatable... hehe
 
-
-I really liked Ron for his fun nature,  
+I really liked Ron for his fun nature,  cracking stupid jokes, and being scared of spiders. There is something refreshing about seeing a character havinhg close to no powers or factors that make him different from others. His Character Arc is really well thought out.
+In the beggining he was just another poor kid, having 6 siblings is no joke. Between Hand-me-downs and broken wands, he had a really keen interest in Quidditch. 
