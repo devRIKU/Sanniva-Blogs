@@ -7,21 +7,31 @@
   --font-body: "Lora", serif;
   --font-mono: "JetBrains Mono", monospace;
 
-  --color-dark-bg: #1A1208;
-  --color-dark-surface: #26190A;
-  --color-dark-text: #F2D98B;
-  --color-dark-accent: #E63329;
-  --color-dark-secondary: #B89A5A;
-  --color-dark-border: #3D2B0E;
-  --color-dark-btn-bg: #2A1C0A;
+  /* Colors derived from DESIGN.md */
+  --color-dark-bg: #1a1c1c;
+  --color-dark-surface: #2f3131;
+  --color-dark-text: #f9f9f9;
+  --color-dark-accent: #e07a5f;
+  --color-dark-secondary: #81b29a;
+  --color-dark-border: #55423e;
+  --color-dark-btn-bg: #e07a5f;
+  --color-dark-btn-text: #ffffff;
 
-  --color-light-bg: #F5E6C0;
-  --color-light-surface: #EDD98A;
-  --color-light-text: #1A1208;
-  --color-light-accent: #CC2A21;
-  --color-light-secondary: #5C4A1E;
-  --color-light-border: #C9A84C;
-  --color-light-btn-bg: #EDD98A;
+  --color-light-bg: #f8f8f8;
+  --color-light-surface: #ffffff;
+  --color-light-text: #000000;
+  --color-light-accent: #e07a5f;
+  --color-light-secondary: #81b29a;
+  --color-light-border: #e2e2e2;
+  --color-light-btn-bg: #1a1c1c;
+  --color-light-btn-text: #ffffff;
+
+  /* Rounded corners from DESIGN.md */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
 }
 
 @layer base {
@@ -33,7 +43,7 @@
     --secondary: var(--color-dark-secondary);
     --border: var(--color-dark-border);
     --btn-bg: var(--color-dark-btn-bg);
-    --btn-text: var(--color-dark-text);
+    --btn-text: var(--color-dark-btn-text);
   }
 
   :root.light {
@@ -44,7 +54,7 @@
     --secondary: var(--color-light-secondary);
     --border: var(--color-light-border);
     --btn-bg: var(--color-light-btn-bg);
-    --btn-text: var(--color-light-text);
+    --btn-text: var(--color-light-btn-text);
   }
 
   body {

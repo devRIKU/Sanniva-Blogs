@@ -10,9 +10,3 @@ coverage/
 # Ignore blog posts but keep Extras
 src/content/posts/*
 !src/content/posts/Extras/
-
-# Ignore Obsidian settings and plugins
-.obsidian/
-.copilot/
-copilot/
-.trash/
