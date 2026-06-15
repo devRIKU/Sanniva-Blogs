@@ -18,7 +18,7 @@ export default function AllBlogs() {
   );
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 md:py-12">
+    <div className="max-w-5xl mx-auto px-6 sm:px-10 md:px-14 py-6 sm:py-10 md:py-12">
       <Link to="/" className="inline-flex items-center text-[var(--secondary)] hover:text-[var(--accent)] transition-colors mb-4 sm:mb-6 md:mb-8 font-mono text-sm uppercase tracking-wider">
         <ArrowLeft className="mr-2" size={16} /> Back to Home
       </Link>

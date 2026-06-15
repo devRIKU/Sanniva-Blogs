@@ -63,7 +63,8 @@ export default function Home() {
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="mb-20"
+        className="mb-14"
+        style={{ paddingTop: '0px' }}
       >
         <div className="flex items-center mb-8">
           <h2 className="text-2xl font-display font-bold uppercase tracking-widest text-[var(--text)]">
@@ -83,7 +84,7 @@ export default function Home() {
             >
               <Link
                 to={`/post/${heroPost.slug}`}
-                className="group relative flex-1 flex flex-col overflow-hidden rounded-xl bg-[var(--surface)] border border-[var(--border)] shadow-md hover:shadow-lg transition-all duration-300 min-h-[400px] w-full"
+                className="group relative flex-1 flex flex-col overflow-hidden rounded-xl bg-[var(--surface)] border border-[var(--border)] shadow-md hover:shadow-lg transition-all duration-300 min-h-[280px] sm:min-h-[320px] lg:min-h-full w-full"
               >
                 <div className="absolute inset-0 z-0">
                   <motion.img
@@ -116,7 +117,7 @@ export default function Home() {
             </motion.div>
 
             {/* Side Cards */}
-            <div className="lg:col-span-4 flex flex-col gap-6">
+            <div className="lg:col-span-4 flex flex-col gap-4">
               {sidePosts.map((post, idx) => (
                 <motion.div
                   key={post.id}
@@ -129,7 +130,7 @@ export default function Home() {
                     to={`/post/${post.slug}`}
                     className="group flex-1 flex w-full flex-col sm:flex-row lg:flex-col bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                   >
-                    <div className="w-full sm:w-2/5 lg:w-full aspect-[16/10] sm:aspect-auto lg:aspect-[16/10] sm:h-full lg:h-48 relative overflow-hidden shrink-0">
+                    <div className="w-full sm:w-2/5 lg:w-full aspect-[16/10] sm:aspect-auto lg:aspect-[16/10] sm:h-full lg:h-32 relative overflow-hidden shrink-0">
                       <motion.img
                         layoutId={`cover-${post.id}`}
                         src={post.cover_image || `https://picsum.photos/seed/blog${idx + 2}/400/400`}
@@ -138,36 +139,20 @@ export default function Home() {
                         referrerPolicy="no-referrer"
                       />
                     </div>
-                    <div className="w-full sm:w-3/5 lg:w-full p-5 flex flex-col justify-center flex-1">
+                    <div className="w-full sm:w-3/5 lg:w-full p-4 flex flex-col justify-center flex-1">
                       <motion.h3 
                         layoutId={`title-${post.id}`}
-                        className="text-xl font-display font-bold text-[var(--text)] mb-2 relative inline-block group-hover:text-[var(--accent)] transition-colors line-clamp-2"
+                        className="text-lg sm:text-xl font-display font-bold text-[var(--text)] mb-2 relative inline-block group-hover:text-[var(--accent)] transition-colors line-clamp-2"
                       >
                         {post.title}
                       </motion.h3>
-                      <p className="text-[var(--secondary)] font-body text-sm line-clamp-2 mt-1">
+                      <p className="text-[var(--secondary)] font-body text-xs sm:text-sm line-clamp-2 mt-1">
                         {post.content.replace(/<[^>]+>/g, '')}
                       </p>
                     </div>
                   </Link>
                 </motion.div>
               ))}
-
-              {/* See More Button */}
-              <motion.div
-                whileHover={{ scale: 1.015 }}
-                whileTap={{ scale: 0.975 }}
-                transition={{ type: "spring", stiffness: 300, damping: 30, mass: 1 }}
-                className="shrink-0"
-              >
-                <Link
-                  to="/all-posts"
-                  className="group flex items-center justify-center w-full py-4 px-6 bg-[var(--btn-bg)] border border-[var(--border)] rounded-2xl font-display font-bold text-xl text-[var(--btn-text)] hover:bg-[var(--btn-bg)]/90 transition-all duration-300 shadow-sm shrink-0"
-                >
-                  see more
-                  <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2" size={24} />
-                </Link>
-              </motion.div>
             </div>
           </div>
         )}

@@ -84,7 +84,7 @@ function Layout() {
                 damping: 30, 
                 mass: 1 
               }}
-              className="fixed inset-y-0 right-0 w-full sm:w-[90%] md:w-[75%] lg:w-[60%] xl:w-[50%] bg-[var(--bg)] shadow-2xl z-[100] border-l border-[var(--border)] overflow-y-auto"
+              className="fixed inset-y-0 right-0 w-full sm:w-[92%] md:w-[85%] lg:w-[78%] xl:w-[70%] bg-[var(--bg)] shadow-2xl z-[100] border-l border-[var(--border)] overflow-y-auto"
             >
               <div className="relative min-h-screen">
                 {/* Minimalist Close button on the top right */}
