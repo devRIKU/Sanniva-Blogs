@@ -10,71 +10,44 @@ import { getPostBySlug, getAllPosts, Post as PostType, getImageUrl } from '../ut
 
 export default function Post() {
   const { slug } = useParams<{ slug: string }>();
-  const [post, setPost] = useState<PostType | null>(null);
-  const [prevPost, setPrevPost] = useState<PostType | null>(null);
-  const [nextPost, setNextPost] = useState<PostType | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [processedContent, setProcessedContent] = useState('');
+  
+  // Find the post and preprocess it synchronously on render to prevent any delay or loading flickers
+  const allPosts = getAllPosts();
+  const currentIndex = allPosts.findIndex(p => p.slug === slug);
+  const post = currentIndex !== -1 ? allPosts[currentIndex] : null;
+  const prevPost = currentIndex !== -1 && currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+  const nextPost = currentIndex !== -1 && currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 
-  useEffect(() => {
-    if (slug) {
-      const allPosts = getAllPosts();
-      const currentIndex = allPosts.findIndex(p => p.slug === slug);
-      
-      if (currentIndex !== -1) {
-        const currentPost = allPosts[currentIndex];
-        setPost(currentPost);
+  const processedContent = React.useMemo(() => {
+    if (!post) return '';
+    return post.content
+      // Replace Obsidian image wikilinks: ![[filename.png]] or ![[filename.png|100]]
+      .replace(/!\[\[([^\]]+)\]\]/g, (match, p1) => {
+        const parts = p1.split('|');
+        const filename = parts[0].trim();
+        const alt = parts.length > 1 ? parts[1].trim() : filename;
+        return `![${alt}](${getImageUrl(filename)})`;
+      })
+      // Replace standard markdown images: ![alt](filename.png)
+      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, filename) => {
+        return `![${alt}](${getImageUrl(filename)})`;
+      })
+      // Replace Obsidian page wikilinks: [[Page Name]] or [[Page Name|Display Text]]
+      .replace(/(?<!!)\[\[([^\]]+)\]\]/g, (match, p1) => {
+        const parts = p1.split('|');
+        const target = parts[0].trim();
+        const display = parts.length > 1 ? parts[1].trim() : target;
         
-        // Preprocess content for Obsidian images and links
-        const content = currentPost.content
-          // Replace Obsidian image wikilinks: ![[filename.png]] or ![[filename.png|100]]
-          .replace(/!\[\[([^\]]+)\]\]/g, (match, p1) => {
-            const parts = p1.split('|');
-            const filename = parts[0].trim();
-            const alt = parts.length > 1 ? parts[1].trim() : filename;
-            return `![${alt}](${getImageUrl(filename)})`;
-          })
-          // Replace standard markdown images: ![alt](filename.png)
-          .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, filename) => {
-            return `![${alt}](${getImageUrl(filename)})`;
-          })
-          // Replace Obsidian page wikilinks: [[Page Name]] or [[Page Name|Display Text]]
-          .replace(/(?<!!)\[\[([^\]]+)\]\]/g, (match, p1) => {
-            const parts = p1.split('|');
-            const target = parts[0].trim();
-            const display = parts.length > 1 ? parts[1].trim() : target;
-            
-            // If it looks like a URL, link directly to it
-            if (target.startsWith('http://') || target.startsWith('https://')) {
-              return `[${display}](${target})`;
-            }
-            
-            // Otherwise, assume it's an internal post link and convert to slug
-            const slug = target.toLowerCase().replace(/\s+/g, '-');
-            return `[${display}](/post/${slug})`;
-          });
-          
-        setProcessedContent(content);
-
-        // Posts are sorted newest first. 
-        // "Previous" (older) is at currentIndex + 1
-        // "Next" (newer) is at currentIndex - 1
-        setPrevPost(currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null);
-        setNextPost(currentIndex > 0 ? allPosts[currentIndex - 1] : null);
-      } else {
-        setPost(null);
-      }
-    }
-    setLoading(false);
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-[var(--text)] font-display font-bold text-2xl">Loading...</div>
-      </div>
-    );
-  }
+        // If it looks like a URL, link directly to it
+        if (target.startsWith('http://') || target.startsWith('https://')) {
+          return `[${display}](${target})`;
+        }
+        
+        // Otherwise, assume it's an internal post link and convert to slug
+        const slug = target.toLowerCase().replace(/\s+/g, '-');
+        return `[${display}](/post/${slug})`;
+      });
+  }, [post]);
 
   if (!post) {
     return (
@@ -89,26 +62,36 @@ export default function Post() {
   }
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
-    >
-      <Link to="/" className="inline-flex items-center text-[var(--secondary)] hover:text-[var(--accent)] transition-colors mb-8 font-mono text-sm uppercase tracking-wider">
+    <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12 sm:pt-8 md:pt-12">
+      <Link to="/" className="inline-flex items-center text-[var(--secondary)] hover:text-[var(--accent)] transition-colors mb-4 sm:mb-6 md:mb-8 font-mono text-sm uppercase tracking-wider">
         <ArrowLeft className="mr-2" size={16} /> Back
       </Link>
+
+      {post.cover_image && (
+        <div className="mb-8 rounded-2xl overflow-hidden shadow-sm h-48 sm:h-64 md:h-[400px] w-full mt-2 sm:mt-4">
+          <motion.img
+            layoutId={`cover-${post.id}`}
+            src={post.cover_image}
+            alt={post.title}
+            className="w-full h-full object-cover"
+            referrerPolicy="no-referrer"
+          />
+        </div>
+      )}
 
       <motion.header 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
-        transition={{ duration: 0.5, delay: 0.1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
         className="mb-10"
       >
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-[var(--text)] leading-tight mb-6">
+        <motion.h1 
+          layoutId={`title-${post.id}`}
+          className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-[var(--text)] leading-tight mb-6"
+        >
           {post.title}
-        </h1>
+        </motion.h1>
         <div className="flex items-center justify-between border-y border-[var(--border)] py-4 font-mono text-sm text-[var(--secondary)] uppercase tracking-wider">
           <div>
             {(() => {
@@ -122,23 +105,6 @@ export default function Post() {
           {post.tags && <div>{post.tags.split(',').map(t => `#${t.trim()}`).join(' ')}</div>}
         </div>
       </motion.header>
-
-      {post.cover_image && (
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-12 rounded-xl overflow-hidden border border-[var(--border)] shadow-md"
-        >
-          <img
-            src={post.cover_image}
-            alt={post.title}
-            className="w-full h-auto object-cover max-h-[600px]"
-            referrerPolicy="no-referrer"
-          />
-        </motion.div>
-      )}
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -215,6 +181,6 @@ export default function Post() {
           <div className="flex-1"></div>
         )}
       </motion.div>
-    </motion.article>
+    </article>
   );
 }

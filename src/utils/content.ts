@@ -56,13 +56,32 @@ export function getAllPosts(): Post[] {
       const { attributes, body } = frontMatter<any>(rawContent);
 
       if (attributes.status === 'Published') {
+        let coverImage = String(attributes.cover_image || '');
+        if (!coverImage) {
+          const title = String(attributes.title || '');
+          const tags = Array.isArray(attributes.tags) ? attributes.tags : (attributes.tags ? String(attributes.tags).split(',') : []);
+          
+          // Determine intent keyword
+          let intentWord = 'blog';
+          if (tags.length > 0 && tags[0].trim()) {
+             intentWord = tags[0].trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+          } else if (title) {
+             const words = title.split(' ').filter(w => w.length > 3);
+             if (words.length > 0) {
+               intentWord = words[0].toLowerCase().replace(/[^a-z0-9]/g, '');
+             }
+          }
+          
+          coverImage = `https://picsum.photos/seed/${intentWord || 'blog'}/1600/800`;
+        }
+
         posts.push({
           id: String(attributes.slug || path),
           title: String(attributes.title || 'Untitled'),
           slug: String(attributes.slug || path.replace('../content/posts/', '').replace('.md', '')),
           created_at: String(attributes.date || new Date().toISOString()),
           content: String(body || ''),
-          cover_image: String(attributes.cover_image || ''),
+          cover_image: coverImage,
           tags: Array.isArray(attributes.tags) ? attributes.tags.join(', ') : String(attributes.tags || ''),
           status: String(attributes.status || ''),
           featured: attributes.featured || false,

@@ -8,106 +8,28 @@ import { getAllPosts, getSettings, Post, Settings } from '../utils/content';
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [settings, setSettings] = useState<Settings | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate async loading for smoother transitions if desired, 
-    // but we can just set it immediately since it's synchronous now.
     setPosts(getAllPosts());
     setSettings(getSettings());
-    setLoading(false);
   }, []);
 
-  if (loading) {
-    return (
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-pulse">
-        {/* Welcome Section Skeleton */}
-        <section className="mb-20">
-          <div className="flex items-center mb-8">
-            <div className="h-8 w-40 bg-[var(--border)] rounded"></div>
-            <div className="ml-4 flex-grow h-px bg-[var(--border)]"></div>
-          </div>
-          <div className="py-4">
-            <div className="h-4 w-full bg-[var(--border)] rounded mb-3"></div>
-            <div className="h-4 w-5/6 bg-[var(--border)] rounded mb-3"></div>
-            <div className="h-4 w-4/6 bg-[var(--border)] rounded mb-6"></div>
-            <div>
-              <div className="h-6 w-16 bg-[var(--border)] rounded mb-3"></div>
-              <div className="h-4 w-20 bg-[var(--border)] rounded"></div>
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Blogs Section Skeleton */}
-        <section className="mb-20">
-          <div className="flex items-center mb-8">
-            <div className="h-8 w-48 bg-[var(--border)] rounded"></div>
-            <div className="ml-4 flex-grow h-px bg-[var(--border)]"></div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            {/* Hero Card Skeleton */}
-            <div className="md:col-span-7 rounded-xl bg-[var(--surface)] border border-[var(--border)] overflow-hidden">
-              <div className="aspect-[4/3] w-full bg-[var(--border)]"></div>
-              <div className="p-6">
-                <div className="h-8 w-3/4 bg-[var(--border)] rounded mb-2"></div>
-                <div className="h-4 w-full bg-[var(--border)] rounded mb-1"></div>
-                <div className="h-4 w-5/6 bg-[var(--border)] rounded"></div>
-              </div>
-            </div>
-            {/* Side Cards Skeleton */}
-            <div className="md:col-span-5 flex flex-col gap-6">
-              {[1, 2].map((i) => (
-                <div key={i} className="flex flex-col sm:flex-row bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden">
-                  <div className="w-full sm:w-2/5 aspect-video sm:aspect-square bg-[var(--border)]"></div>
-                  <div className="w-full sm:w-3/5 p-4 flex flex-col justify-center">
-                    <div className="h-6 w-full bg-[var(--border)] rounded mb-2"></div>
-                    <div className="h-6 w-2/3 bg-[var(--border)] rounded"></div>
-                  </div>
-                </div>
-              ))}
-              <div className="mt-auto py-4 px-6 bg-[var(--surface)] border border-[var(--border)] rounded-xl h-14"></div>
-            </div>
-          </div>
-        </section>
-
-        {/* Recent Blogs Section Skeleton */}
-        <section className="mb-20">
-          <div className="flex items-center mb-8">
-            <div className="h-8 w-40 bg-[var(--border)] rounded"></div>
-            <div className="ml-4 flex-grow h-px bg-[var(--border)]"></div>
-          </div>
-          <div className="h-4 w-3/4 bg-[var(--border)] rounded mb-8 -mt-4"></div>
-          <div className="flex flex-col">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="py-6 border-b border-dashed border-[var(--border)] flex flex-col sm:flex-row sm:items-center justify-between">
-                <div className="w-full sm:w-2/3">
-                  <div className="h-6 w-3/4 bg-[var(--border)] rounded mb-2"></div>
-                  <div className="h-3 w-1/4 bg-[var(--border)] rounded"></div>
-                </div>
-                <div className="mt-2 sm:mt-0 h-4 w-16 bg-[var(--border)] rounded"></div>
-              </div>
-            ))}
-          </div>
-        </section>
-      </div>
-    );
-  }
-
   const featuredPosts = posts.filter((p) => p.featured).slice(0, 3);
-  const recentPosts = posts.slice(0, 5);
+  const heroPost = featuredPosts.length > 0 ? featuredPosts[0] : posts[0]; // Fallback to first post if no featured
+  const sidePosts = featuredPosts.length > 0 ? featuredPosts.slice(1) : [];
 
-  const heroPost = featuredPosts[0] || posts[0]; // Fallback to first post if no featured
-  const sidePosts = featuredPosts.slice(1);
+  const displayedFeaturedIds = new Set([heroPost?.id, ...sidePosts.map(p => p.id)].filter(Boolean));
+  const recentPosts = posts.filter((p) => !displayedFeaturedIds.has(p.id)).slice(0, 5);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
-    >
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 md:py-12">
       {/* Welcome Section */}
-      <section className="mb-20">
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="mb-20"
+      >
         <div className="flex items-center mb-8">
           <h1 className="text-3xl font-display font-bold uppercase tracking-widest text-[var(--text)]">
             Welcome 🎉
@@ -116,7 +38,7 @@ export default function Home() {
         </div>
         <div className="py-4">
           <p className="font-body text-lg sm:text-xl text-[var(--text)] leading-relaxed mb-6">
-            Hey there! I’m a 7th grader at Techno India Group Public School who’s way too into coding and all things techy. I’m not gonna lie—I don’t feel like a genius, but somehow I manage to pull off good grades (magic, maybe?).
+            Hey there! I’m an 8th grader at Techno India Group Public School who’s way too into coding and all things techy. I’m not gonna lie—I don’t feel like a genius, but somehow I manage to pull off good grades (magic, maybe?).
           </p>
           <div>
             <h3 className="text-xl font-display font-bold text-[var(--text)] mb-3">Links</h3>
@@ -130,10 +52,14 @@ export default function Home() {
             </a>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Featured Blogs Section */}
-      <section className="mb-20">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="mb-20"
+      >
         <div className="flex items-center mb-8">
           <h2 className="text-2xl font-display font-bold uppercase tracking-widest text-[var(--text)]">
             Featured Blogs
@@ -142,73 +68,104 @@ export default function Home() {
         </div>
 
         {heroPost && (
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
             {/* Hero Card */}
-            <Link
-              to={`/post/${heroPost.slug}`}
-              className="md:col-span-7 group relative block overflow-hidden rounded-xl bg-[var(--surface)] border border-[var(--border)] shadow-md hover:shadow-lg transition-all duration-300"
+            <motion.div 
+              className="lg:col-span-8 flex"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30, mass: 1 }}
             >
-              <div className="aspect-[4/3] w-full relative overflow-hidden">
-                <img
-                  src={heroPost.cover_image || 'https://picsum.photos/seed/blog1/800/600'}
-                  alt={heroPost.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-black/30 backdrop-blur-md border-t border-white/10">
-                <h3 className="text-3xl font-display font-bold text-white mb-2 group-hover:text-[var(--accent)] transition-colors">
-                  {heroPost.title}
-                </h3>
-                <p className="text-gray-300 font-body text-sm line-clamp-2">
-                  {heroPost.content.replace(/<[^>]+>/g, '')}
-                </p>
-              </div>
-            </Link>
+              <Link
+                to={`/post/${heroPost.slug}`}
+                className="group relative flex flex-col overflow-hidden rounded-xl bg-[var(--surface)] border border-[var(--border)] shadow-md hover:shadow-lg transition-all duration-300 min-h-[400px] w-full lg:min-h-full"
+              >
+                <div className="absolute inset-0 z-0">
+                  <motion.img
+                    layoutId={`cover-${heroPost.id}`}
+                    src={heroPost.cover_image || 'https://picsum.photos/seed/blog1/800/600'}
+                    alt={heroPost.title}
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                </div>
+                
+                <div className="mt-auto relative z-10 p-6 sm:p-8 bg-black/40 backdrop-blur-md border-t border-white/10">
+                  <div className="mb-4">
+                    <span className="px-3 py-1 bg-[var(--accent)] text-white font-mono text-xs uppercase tracking-widest rounded-full font-bold">
+                      Featured
+                    </span>
+                  </div>
+                  <motion.h3 
+                    layoutId={`title-${heroPost.id}`}
+                    className="text-3xl sm:text-4xl font-display font-bold text-white mb-3 group-hover:text-[var(--accent)] transition-colors leading-tight"
+                  >
+                    {heroPost.title}
+                  </motion.h3>
+                  <p className="text-gray-200 font-body text-base line-clamp-2">
+                    {heroPost.content.replace(/<[^>]+>/g, '')}
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
 
             {/* Side Cards */}
-            <div className="md:col-span-5 flex flex-col gap-6">
+            <div className="lg:col-span-4 flex flex-col gap-6">
               {sidePosts.map((post, idx) => (
-                <Link
+                <motion.div
                   key={post.id}
-                  to={`/post/${post.slug}`}
-                  className="group flex flex-col sm:flex-row bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                  className="flex-1 flex"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30, mass: 1 }}
                 >
-                  <div className={`w-full sm:w-2/5 aspect-video sm:aspect-square relative overflow-hidden ${idx % 2 === 0 ? 'clipped-edge' : 'clipped-edge-reverse'}`}>
-                    <img
-                      src={post.cover_image || `https://picsum.photos/seed/blog${idx + 2}/400/400`}
-                      alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                  <div className="w-full sm:w-3/5 p-4 flex flex-col justify-center">
-                    <h3 className="text-xl font-display font-bold text-[var(--text)] mb-2 relative inline-block">
+                  <Link
+                    to={`/post/${post.slug}`}
+                    className="group flex w-full flex-col sm:flex-row lg:flex-col bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                  >
+                    <div className={`w-full sm:w-2/5 lg:w-full aspect-[16/10] sm:aspect-auto lg:aspect-[16/10] sm:h-full lg:h-48 relative overflow-hidden`}>
+                      <motion.img
+                        layoutId={`cover-${post.id}`}
+                        src={post.cover_image || `https://picsum.photos/seed/blog${idx + 2}/400/400`}
+                        alt={post.title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                    <div className="w-full sm:w-3/5 lg:w-full p-5 flex flex-col justify-center">
+                    <motion.h3 
+                      layoutId={`title-${post.id}`}
+                      className="text-xl font-display font-bold text-[var(--text)] mb-2 relative inline-block group-hover:text-[var(--accent)] transition-colors line-clamp-2"
+                    >
                       {post.title}
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[var(--accent)] transition-all duration-300 group-hover:w-full"></span>
-                    </h3>
-                    {idx === 1 && (
-                      <p className="text-[var(--secondary)] font-body text-xs line-clamp-2 mt-2">
+                    </motion.h3>
+                      <p className="text-[var(--secondary)] font-body text-sm line-clamp-2 mt-1">
                         {post.content.replace(/<[^>]+>/g, '')}
                       </p>
-                    )}
-                  </div>
-                </Link>
+                    </div>
+                  </Link>
+                </motion.div>
               ))}
 
               {/* See More Button */}
-              <Link
-                to="/all-posts"
-                className="group mt-auto flex items-center justify-center w-full py-4 px-6 bg-[var(--btn-bg)] border border-[var(--border)] rounded-xl font-display font-bold text-xl text-[var(--btn-text)] hover:bg-[var(--surface)] transition-all duration-300 shadow-sm"
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30, mass: 1 }}
               >
-                see more
-                <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2" size={24} />
-              </Link>
+                <Link
+                  to="/all-posts"
+                  className="group mt-6 flex items-center justify-center w-full py-4 px-6 bg-[var(--btn-bg)] border border-[var(--border)] rounded-2xl font-display font-bold text-xl text-[var(--btn-text)] hover:bg-[var(--btn-bg)]/90 transition-all duration-300 shadow-sm shrink-0"
+                >
+                  see more
+                  <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2" size={24} />
+                </Link>
+              </motion.div>
             </div>
           </div>
         )}
-      </section>
+      </motion.section>
 
       {/* Recent Blogs Section */}
       <section className="mb-20">
@@ -231,43 +188,57 @@ export default function Home() {
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
             >
-              <Link
-                to={`/post/${post.slug}`}
-                className="group block py-6 border-b border-dashed border-[var(--border)] hover:border-solid hover:border-[var(--accent)] transition-all duration-300 relative overflow-hidden pl-4"
+              <motion.div
+                whileHover={{ scale: 1.01, x: 5 }}
+                whileTap={{ scale: 0.99 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
               >
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--accent)] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between">
-                  <div>
-                    <h3 className="text-2xl font-display font-bold text-[var(--text)] mb-1 group-hover:text-[var(--accent)] transition-colors">
-                      {post.title}
-                    </h3>
-                    <p className="font-mono text-xs text-[var(--secondary)] uppercase tracking-wider">
-                      {post.tags ? post.tags.split(',').join(' • ') : 'ARTICLE'}
-                    </p>
+                <Link
+                  to={`/post/${post.slug}`}
+                  className="group block py-6 border-b border-dashed border-[var(--border)] hover:border-solid hover:border-[var(--accent)] transition-all duration-300 relative overflow-hidden pl-4"
+                >
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--accent)] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+                    <div>
+                      <motion.h3 
+                        className="text-2xl font-display font-bold text-[var(--text)] mb-1 group-hover:text-[var(--accent)] transition-colors"
+                      >
+                        {post.title}
+                      </motion.h3>
+                      <p className="font-mono text-xs text-[var(--secondary)] uppercase tracking-wider">
+                        {post.tags ? post.tags.split(',').join(' • ') : 'ARTICLE'}
+                      </p>
+                    </div>
+                    <div className="mt-2 sm:mt-0 font-mono text-sm text-[var(--secondary)] font-bold">
+                      {(() => {
+                        try {
+                          return format(new Date(post.created_at), 'dd/MM/yy');
+                        } catch (e) {
+                          return post.created_at;
+                        }
+                      })()}
+                    </div>
                   </div>
-                  <div className="mt-2 sm:mt-0 font-mono text-sm text-[var(--secondary)] font-bold">
-                    {(() => {
-                      try {
-                        return format(new Date(post.created_at), 'dd/MM/yy');
-                      } catch (e) {
-                        return post.created_at;
-                      }
-                    })()}
-                  </div>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             </motion.div>
           ))}
         </div>
         
         {/* See More Button */}
-        <Link
-          to="/all-posts"
-          className="group mt-8 flex items-center justify-center w-full py-4 px-6 bg-[var(--btn-bg)] border border-[var(--border)] rounded-xl font-display font-bold text-xl text-[var(--btn-text)] hover:bg-[var(--surface)] transition-all duration-300 shadow-sm"
+        <motion.div
+           whileHover={{ scale: 1.02 }}
+           whileTap={{ scale: 0.95 }}
+           transition={{ type: "spring", stiffness: 300, damping: 30, mass: 1 }}
         >
-          see more
-          <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2" size={24} />
-        </Link>
+          <Link
+            to="/all-posts"
+            className="group mt-8 flex items-center justify-center w-full py-4 px-6 bg-[var(--btn-bg)] border border-[var(--border)] rounded-2xl font-display font-bold text-xl text-[var(--btn-text)] hover:bg-[var(--surface)] transition-all duration-300 shadow-sm"
+          >
+            see more
+            <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2" size={24} />
+          </Link>
+        </motion.div>
       </section>
 
       {/* Beyond The Blog Section */}
@@ -290,6 +261,6 @@ export default function Home() {
           </p>
         </div>
       </section>
-    </motion.div>
+    </div>
   );
 }

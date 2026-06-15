@@ -12,7 +12,7 @@
   --color-dark-surface: #2f3131;
   --color-dark-text: #f9f9f9;
   --color-dark-accent: #e07a5f;
-  --color-dark-secondary: #81b29a;
+  --color-dark-secondary: #dbc1ba;
   --color-dark-border: #55423e;
   --color-dark-btn-bg: #e07a5f;
   --color-dark-btn-text: #ffffff;
@@ -21,17 +21,17 @@
   --color-light-surface: #ffffff;
   --color-light-text: #000000;
   --color-light-accent: #e07a5f;
-  --color-light-secondary: #81b29a;
+  --color-light-secondary: #88726d;
   --color-light-border: #e2e2e2;
   --color-light-btn-bg: #1a1c1c;
   --color-light-btn-text: #ffffff;
 
   /* Rounded corners from DESIGN.md */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
-  --radius-2xl: 2rem;
+  --radius-sm: 0.15rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1.25rem;
 }
 
 @layer base {
