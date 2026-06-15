@@ -11,14 +11,14 @@
             "id": "57232dbf8b3f9c47",
             "type": "leaf",
             "state": {
-              "type": "split-diff-view",
+              "type": "markdown",
               "state": {
-                "aFile": "src/content/posts/anime.md",
-                "bFile": "src/content/posts/anime.md",
-                "aRef": ""
+                "file": "anime.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "diff",
-              "title": "Diff: anime  (Working Tree)"
+              "icon": "lucide-file",
+              "title": "anime"
             }
           }
         ]
@@ -206,15 +206,15 @@
   },
   "active": "57232dbf8b3f9c47",
   "lastOpenFiles": [
-    "anime.md",
-    "rainy-day-code.md",
-    "my-first-python-game.md",
-    "first-time-tailwind.md",
-    "my-cousins.md",
-    "a-new-series.md",
     "harry-potter.md",
-    "Extras/Templates/a-new-blog.md",
     "last-day-before-exam.md",
+    "my-cousins.md",
+    "my-first-python-game.md",
+    "anime.md",
+    "first-time-tailwind.md",
+    "rainy-day-code.md",
+    "a-new-series.md",
+    "Extras/Templates/a-new-blog.md",
     "conflict-files-obsidian-git.md",
     "Untitled.base",
     "Extras/Templates/Blog Template.md",
