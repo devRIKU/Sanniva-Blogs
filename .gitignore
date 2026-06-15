@@ -7,6 +7,4 @@ coverage/
 .env*
 !.env.example
 
-# Ignore blog posts but keep Extras
-src/content/posts/*
-!src/content/posts/Extras/
+
