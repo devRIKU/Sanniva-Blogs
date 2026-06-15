@@ -19,7 +19,12 @@ export default function Home() {
   const sidePosts = featuredPosts.length > 0 ? featuredPosts.slice(1) : [];
 
   const displayedFeaturedIds = new Set([heroPost?.id, ...sidePosts.map(p => p.id)].filter(Boolean));
-  const recentPosts = posts.filter((p) => !displayedFeaturedIds.has(p.id)).slice(0, 5);
+  let recentPosts = posts.filter((p) => !displayedFeaturedIds.has(p.id));
+  if (recentPosts.length < 4) {
+    // Fallback to preserve a rich list of blogs when count is small
+    recentPosts = posts;
+  }
+  recentPosts = recentPosts.slice(0, 5);
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 md:py-12">
@@ -71,14 +76,14 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
             {/* Hero Card */}
             <motion.div 
-              className="lg:col-span-8 flex"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.95 }}
+              className="lg:col-span-8 flex flex-col"
+              whileHover={{ scale: 1.015 }}
+              whileTap={{ scale: 0.975 }}
               transition={{ type: "spring", stiffness: 300, damping: 30, mass: 1 }}
             >
               <Link
                 to={`/post/${heroPost.slug}`}
-                className="group relative flex flex-col overflow-hidden rounded-xl bg-[var(--surface)] border border-[var(--border)] shadow-md hover:shadow-lg transition-all duration-300 min-h-[400px] w-full lg:min-h-full"
+                className="group relative flex-1 flex flex-col overflow-hidden rounded-xl bg-[var(--surface)] border border-[var(--border)] shadow-md hover:shadow-lg transition-all duration-300 min-h-[400px] w-full"
               >
                 <div className="absolute inset-0 z-0">
                   <motion.img
@@ -115,16 +120,16 @@ export default function Home() {
               {sidePosts.map((post, idx) => (
                 <motion.div
                   key={post.id}
-                  className="flex-1 flex"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="flex-1 flex flex-col"
+                  whileHover={{ scale: 1.015 }}
+                  whileTap={{ scale: 0.975 }}
                   transition={{ type: "spring", stiffness: 300, damping: 30, mass: 1 }}
                 >
                   <Link
                     to={`/post/${post.slug}`}
-                    className="group flex w-full flex-col sm:flex-row lg:flex-col bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                    className="group flex-1 flex w-full flex-col sm:flex-row lg:flex-col bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                   >
-                    <div className={`w-full sm:w-2/5 lg:w-full aspect-[16/10] sm:aspect-auto lg:aspect-[16/10] sm:h-full lg:h-48 relative overflow-hidden`}>
+                    <div className="w-full sm:w-2/5 lg:w-full aspect-[16/10] sm:aspect-auto lg:aspect-[16/10] sm:h-full lg:h-48 relative overflow-hidden shrink-0">
                       <motion.img
                         layoutId={`cover-${post.id}`}
                         src={post.cover_image || `https://picsum.photos/seed/blog${idx + 2}/400/400`}
@@ -133,13 +138,13 @@ export default function Home() {
                         referrerPolicy="no-referrer"
                       />
                     </div>
-                    <div className="w-full sm:w-3/5 lg:w-full p-5 flex flex-col justify-center">
-                    <motion.h3 
-                      layoutId={`title-${post.id}`}
-                      className="text-xl font-display font-bold text-[var(--text)] mb-2 relative inline-block group-hover:text-[var(--accent)] transition-colors line-clamp-2"
-                    >
-                      {post.title}
-                    </motion.h3>
+                    <div className="w-full sm:w-3/5 lg:w-full p-5 flex flex-col justify-center flex-1">
+                      <motion.h3 
+                        layoutId={`title-${post.id}`}
+                        className="text-xl font-display font-bold text-[var(--text)] mb-2 relative inline-block group-hover:text-[var(--accent)] transition-colors line-clamp-2"
+                      >
+                        {post.title}
+                      </motion.h3>
                       <p className="text-[var(--secondary)] font-body text-sm line-clamp-2 mt-1">
                         {post.content.replace(/<[^>]+>/g, '')}
                       </p>
@@ -150,13 +155,14 @@ export default function Home() {
 
               {/* See More Button */}
               <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.015 }}
+                whileTap={{ scale: 0.975 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30, mass: 1 }}
+                className="shrink-0"
               >
                 <Link
                   to="/all-posts"
-                  className="group mt-6 flex items-center justify-center w-full py-4 px-6 bg-[var(--btn-bg)] border border-[var(--border)] rounded-2xl font-display font-bold text-xl text-[var(--btn-text)] hover:bg-[var(--btn-bg)]/90 transition-all duration-300 shadow-sm shrink-0"
+                  className="group flex items-center justify-center w-full py-4 px-6 bg-[var(--btn-bg)] border border-[var(--border)] rounded-2xl font-display font-bold text-xl text-[var(--btn-text)] hover:bg-[var(--btn-bg)]/90 transition-all duration-300 shadow-sm shrink-0"
                 >
                   see more
                   <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2" size={24} />
