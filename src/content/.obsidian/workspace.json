@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "posts/friends.md",
+                "file": "connections/older-brother.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "friends"
+              "title": "older-brother"
             }
           }
         ],
@@ -109,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "posts/friends.md",
+                "file": "connections/older-brother.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +119,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for friends"
+              "title": "Backlinks for older-brother"
             }
           },
           {
@@ -128,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "posts/friends.md",
+                "file": "connections/older-brother.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from friends"
+              "title": "Outgoing links from older-brother"
             }
           },
           {
@@ -171,13 +171,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "posts/friends.md",
+                "file": "connections/older-brother.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of friends"
+              "title": "Outline of older-brother"
             }
           },
           {
@@ -209,11 +209,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d3d49d42308f454c",
+  "active": "e6ddebe1a3b6740c",
   "lastOpenFiles": [
+    "posts/friends.md",
     "posts/anime.md",
     "posts/a-new-series.md",
-    "posts/friends.md",
     "posts/harry-potter.md",
     "posts/last-day-before-exam.md",
     "posts/my-cousins.md",

@@ -1,5 +1,5 @@
 ---
-name: RIKU
+name: Amkhrjee
 relation: Older Brother & Computer Mentor
 avatar_image: https://picsum.photos/seed/brother/400/400
 related_posts:
