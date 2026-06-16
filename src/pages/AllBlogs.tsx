@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { X, Search } from 'lucide-react';
 import { format } from 'date-fns';
-import { getAllPosts, Post } from '../utils/content';
+import { getAllPosts } from '../utils/content';
 
 export default function AllBlogs() {
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   // Synchronously fetch posts on compile/render to eliminate flicker or loading gaps
   const posts = getAllPosts();
@@ -18,26 +19,40 @@ export default function AllBlogs() {
   );
 
   return (
-    <div className="max-w-5xl mx-auto px-6 sm:px-10 md:px-14 py-6 sm:py-10 md:py-12">
-      <Link to="/" className="inline-flex items-center text-[var(--secondary)] hover:text-[var(--accent)] transition-colors mb-4 sm:mb-6 md:mb-8 font-mono text-sm uppercase tracking-wider">
-        <ArrowLeft className="mr-2" size={16} /> Back to Home
-      </Link>
-
-      <section className="mb-20">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-          <h1 className="text-3xl font-display font-bold uppercase tracking-widest text-[var(--text)]">
+    <div className="flex flex-col min-h-screen bg-[var(--bg)]">
+      {/* Sticky Header matching the content width layout */}
+      <header className="sticky top-0 bg-[var(--bg)]/90 backdrop-blur-md border-b border-[var(--border)] z-30 py-3 sm:py-6">
+        <div className="w-full px-4 sm:px-10 md:px-14 flex items-center justify-between gap-3 sm:gap-4">
+          <h1 className="text-xs min-[375px]:text-sm min-[420px]:text-base sm:text-xl md:text-2xl lg:text-3xl font-display font-bold uppercase tracking-widest text-[var(--text)] truncate shrink-0">
             All Blogs
           </h1>
-          <input
-            type="text"
-            placeholder="Search posts..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-4 py-2 bg-[var(--surface)] border border-[var(--border)] rounded-lg font-body text-[var(--text)] focus:outline-none focus:border-[var(--accent)] transition-colors"
-          />
+          
+          <div className="flex items-center gap-2 sm:gap-4 flex-grow sm:flex-grow-0 justify-end max-w-[70%] sm:max-w-none">
+            <div className="relative flex-grow sm:flex-grow-0 max-w-[150px] min-[375px]:max-w-[180px] min-[420px]:max-w-[220px] sm:max-w-xs w-full">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--secondary)]" size={16} />
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-9 pr-3 sm:pr-4 py-2 bg-[var(--surface)] border border-[var(--border)] rounded-lg font-body text-[var(--text)] focus:outline-none focus:border-[var(--accent)] transition-colors text-xs sm:text-sm"
+              />
+            </div>
+            
+            <button
+              onClick={() => navigate('/')}
+              className="p-1.5 sm:p-2 rounded-full hover:bg-[var(--surface)] border border-[var(--border)] text-[var(--secondary)] hover:text-[var(--text)] transition-colors flex items-center justify-center shadow-sm shrink-0"
+              aria-label="Close drawer"
+            >
+              <X size={16} className="sm:hidden" />
+              <X size={18} className="hidden sm:block" />
+            </button>
+          </div>
         </div>
-        <div className="h-px bg-[var(--border)] mb-8"></div>
+      </header>
 
+      {/* Main Content Area */}
+      <main className="flex-grow w-full px-6 sm:px-10 md:px-14 py-8 sm:py-10">
         <div className="flex flex-col">
           {filteredPosts.map((post, idx) => (
             <motion.div
@@ -54,16 +69,14 @@ export default function AllBlogs() {
               >
                 <Link
                   to={`/post/${post.slug}`}
-                  className="group block py-6 border-b border-dashed border-[var(--border)] hover:border-solid hover:border-[var(--accent)] transition-all duration-300 relative overflow-hidden pl-4"
+                  className="group block py-6 border-b border-solid border-[var(--border)] hover:border-[var(--accent)] transition-colors duration-300 relative overflow-hidden pl-4"
                 >
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--accent)] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between">
                     <div>
-                      <motion.h3 
-                        className="text-2xl font-display font-bold text-[var(--text)] mb-1 group-hover:text-[var(--accent)] transition-colors"
-                      >
+                      <h3 className="text-2xl font-display font-bold text-[var(--text)] mb-1 group-hover:text-[var(--accent)] transition-colors">
                         {post.title}
-                      </motion.h3>
+                      </h3>
                       <p className="font-mono text-xs text-[var(--secondary)] uppercase tracking-wider">
                         {post.tags ? post.tags.split(',').join(' • ') : 'ARTICLE'}
                       </p>
@@ -89,7 +102,7 @@ export default function AllBlogs() {
             </div>
           )}
         </div>
-      </section>
+      </main>
     </div>
   );
 }

@@ -5,6 +5,8 @@ import { ArrowRight } from 'lucide-react';
 import { format } from 'date-fns';
 import { getAllPosts, getSettings, Post, Settings } from '../utils/content';
 
+let hasPlayedEntryAnimation = false;
+
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [settings, setSettings] = useState<Settings | null>(null);
@@ -12,6 +14,7 @@ export default function Home() {
   useEffect(() => {
     setPosts(getAllPosts());
     setSettings(getSettings());
+    hasPlayedEntryAnimation = true;
   }, []);
 
   const featuredPosts = posts.filter((p) => p.featured).slice(0, 3);
@@ -26,11 +29,15 @@ export default function Home() {
   }
   recentPosts = recentPosts.slice(0, 5);
 
+  const initialPropsFadeUp = hasPlayedEntryAnimation ? false : { opacity: 0, y: 20 };
+  const initialPropsFade = hasPlayedEntryAnimation ? false : { opacity: 0 };
+  const initialPropsFadeRight = hasPlayedEntryAnimation ? false : { opacity: 0, x: -20 };
+
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 md:py-12">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 md:py-12">
       {/* Welcome Section */}
       <motion.section 
-        initial={{ opacity: 0, y: 20 }}
+        initial={initialPropsFadeUp}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="mb-20"
@@ -61,7 +68,7 @@ export default function Home() {
 
       {/* Featured Blogs Section */}
       <motion.section 
-        initial={{ opacity: 0 }}
+        initial={initialPropsFade}
         animate={{ opacity: 1 }}
         className="mb-14"
         style={{ paddingTop: '0px' }}
@@ -103,12 +110,9 @@ export default function Home() {
                       Featured
                     </span>
                   </div>
-                  <motion.h3 
-                    layoutId={`title-${heroPost.id}`}
-                    className="text-3xl sm:text-4xl font-display font-bold text-white mb-3 group-hover:text-[var(--accent)] transition-colors leading-tight"
-                  >
+                  <h3 className="text-3xl sm:text-4xl font-display font-bold text-white mb-3 group-hover:text-[var(--accent)] transition-colors leading-tight">
                     {heroPost.title}
-                  </motion.h3>
+                  </h3>
                   <p className="text-gray-200 font-body text-base line-clamp-2">
                     {heroPost.content.replace(/<[^>]+>/g, '')}
                   </p>
@@ -140,12 +144,9 @@ export default function Home() {
                       />
                     </div>
                     <div className="w-full sm:w-3/5 lg:w-full p-4 flex flex-col justify-center flex-1">
-                      <motion.h3 
-                        layoutId={`title-${post.id}`}
-                        className="text-lg sm:text-xl font-display font-bold text-[var(--text)] mb-2 relative inline-block group-hover:text-[var(--accent)] transition-colors line-clamp-2"
-                      >
+                      <h3 className="text-lg sm:text-xl font-display font-bold text-[var(--text)] mb-2 relative inline-block group-hover:text-[var(--accent)] transition-colors line-clamp-2">
                         {post.title}
-                      </motion.h3>
+                      </h3>
                       <p className="text-[var(--secondary)] font-body text-xs sm:text-sm line-clamp-2 mt-1">
                         {post.content.replace(/<[^>]+>/g, '')}
                       </p>
@@ -174,10 +175,10 @@ export default function Home() {
           {recentPosts.map((post, idx) => (
             <motion.div
               key={post.id}
-              initial={{ opacity: 0, x: -20 }}
+              initial={initialPropsFadeRight}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              transition={{ duration: 0.4, delay: hasPlayedEntryAnimation ? 0 : idx * 0.1 }}
             >
               <motion.div
                 whileHover={{ scale: 1.01, x: 5 }}
@@ -186,16 +187,14 @@ export default function Home() {
               >
                 <Link
                   to={`/post/${post.slug}`}
-                  className="group block py-6 border-b border-dashed border-[var(--border)] hover:border-solid hover:border-[var(--accent)] transition-all duration-300 relative overflow-hidden pl-4"
+                  className="group block py-6 border-b border-solid border-[var(--border)] hover:border-[var(--accent)] transition-colors duration-300 relative overflow-hidden pl-4"
                 >
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--accent)] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between">
                     <div>
-                      <motion.h3 
-                        className="text-2xl font-display font-bold text-[var(--text)] mb-1 group-hover:text-[var(--accent)] transition-colors"
-                      >
+                      <h3 className="text-2xl font-display font-bold text-[var(--text)] mb-1 group-hover:text-[var(--accent)] transition-colors">
                         {post.title}
-                      </motion.h3>
+                      </h3>
                       <p className="font-mono text-xs text-[var(--secondary)] uppercase tracking-wider">
                         {post.tags ? post.tags.split(',').join(' • ') : 'ARTICLE'}
                       </p>

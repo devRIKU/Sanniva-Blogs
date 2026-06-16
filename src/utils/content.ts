@@ -21,8 +21,23 @@ export interface Settings {
   projects_url: string;
 }
 
+export interface Connection {
+  id: string;
+  name: string;
+  slug: string;
+  relation: string;
+  avatar_image?: string;
+  content: string;
+  related_posts?: string[];
+}
+
 // Load all markdown files from the content/posts directory, excluding Extras
 const postFiles = import.meta.glob(['../content/posts/**/*.md', '!../content/posts/Extras/**'], { 
+  query: '?raw', 
+  import: 'default', 
+  eager: true
+});
+const connectionFiles = import.meta.glob('../content/connections/**/*.md', { 
   query: '?raw', 
   import: 'default', 
   eager: true
@@ -106,4 +121,32 @@ export function getPostBySlug(slug: string): Post | undefined {
 // but you could easily move this to a `src/content/settings.json` file.
 export function getSettings(): Settings {
   return settingsData as Settings;
+}
+
+export function getAllConnections(): Connection[] {
+  const connections: Connection[] = [];
+
+  for (const path in connectionFiles) {
+    try {
+      const rawContent = connectionFiles[path] as string;
+      const { attributes, body } = frontMatter<any>(rawContent);
+
+      connections.push({
+        id: String(attributes.slug || path),
+        name: String(attributes.name || 'Anonymous'),
+        slug: String(attributes.slug || path.replace('../content/connections/', '').replace('.md', '')),
+        relation: String(attributes.relation || ''),
+        avatar_image: attributes.avatar_image ? String(attributes.avatar_image) : undefined,
+        content: String(body || ''),
+        related_posts: Array.isArray(attributes.related_posts) 
+          ? attributes.related_posts.map((p: any) => String(p)) 
+          : (attributes.related_posts ? String(attributes.related_posts).split(',').map(s => s.trim()) : [])
+      });
+    } catch (error) {
+      console.error(`Error parsing markdown file ${path}:`, error);
+    }
+  }
+
+  // Sort alphabetically by name
+  return connections.sort((a, b) => a.name.localeCompare(b.name));
 }

@@ -3,7 +3,7 @@ title: A New Series
 slug: a-new-series
 date: 2026-02-15
 status: Published
-featured: true
+featured: false
 tags:
   - thoughts
   - movie

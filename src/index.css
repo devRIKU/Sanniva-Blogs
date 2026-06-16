@@ -57,8 +57,30 @@
     --btn-text: var(--color-light-btn-text);
   }
 
+  html, body {
+    scrollbar-gutter: stable;
+  }
+
   body {
-    @apply bg-[var(--bg)] text-[var(--text)] font-body transition-colors duration-400 ease-in-out;
+    @apply bg-[var(--bg)] text-[var(--text)] font-body;
+  }
+
+  /* Smooth transition for theme variables */
+  body, 
+  header, 
+  footer, 
+  main, 
+  article, 
+  section, 
+  button, 
+  input, 
+  a, 
+  div,
+  span,
+  h1, h2, h3, h4, h5, h6 {
+    transition-property: background-color, border-color, color, text-decoration-color, fill, stroke;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   h1, h2, h3, h4, h5, h6 {

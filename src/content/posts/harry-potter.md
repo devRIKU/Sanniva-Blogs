@@ -3,7 +3,7 @@ title: An old favorite
 slug: an-old-favorite
 date: 2026-04-04
 status: Published
-featured: true
+featured: false
 tags:
   - film
   - thoughts

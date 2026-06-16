@@ -62,7 +62,7 @@ export default function Post() {
   }
 
   return (
-    <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12 sm:pt-8 md:pt-12">
+    <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12 sm:pt-8 md:pt-12">
       <Link to="/" className="inline-flex items-center text-[var(--secondary)] hover:text-[var(--accent)] transition-colors mb-4 sm:mb-6 md:mb-8 font-mono text-sm uppercase tracking-wider">
         <ArrowLeft className="mr-2" size={16} /> Back
       </Link>
@@ -86,12 +86,9 @@ export default function Post() {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="mb-10"
       >
-        <motion.h1 
-          layoutId={`title-${post.id}`}
-          className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-[var(--text)] leading-tight mb-6"
-        >
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-[var(--text)] leading-tight mb-6">
           {post.title}
-        </motion.h1>
+        </h1>
         <div className="flex items-center justify-between border-y border-[var(--border)] py-4 font-mono text-sm text-[var(--secondary)] uppercase tracking-wider">
           <div>
             {(() => {
