@@ -1,5 +1,5 @@
 ---
-name: Ankush Chakraborty
+name: Ankush
 relation: The Loyal Buddy
 avatar_image: https://picsum.photos/seed/royalty/400/400
 related_posts:

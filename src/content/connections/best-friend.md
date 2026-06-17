@@ -1,5 +1,5 @@
 ---
-name: Ujan Chanda
+name: Ujan
 relation: Besta Buddy
 avatar_image: https://picsum.photos/seed/friend/400/400
 related_posts:
