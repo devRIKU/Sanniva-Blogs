@@ -11,10 +11,14 @@
             "id": "57232dbf8b3f9c47",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "connections/ankush.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "ankush"
             }
           }
         ]
@@ -201,6 +205,9 @@
   },
   "active": "57232dbf8b3f9c47",
   "lastOpenFiles": [
+    "connections/best-friend.md",
+    "connections/rishap.md",
+    "connections/Ayushi.md",
     "friends.md",
     "Untitled.md",
     "anime.md",
@@ -226,9 +233,6 @@
     "copilot/copilot-custom-prompts/Make shorter.md",
     "copilot/copilot-custom-prompts/Make longer.md",
     "copilot/copilot-custom-prompts/Generate table of contents.md",
-    "copilot/copilot-custom-prompts/Generate glossary.md",
-    "copilot/copilot-custom-prompts/Fix grammar and spelling.md",
-    "copilot/copilot-custom-prompts/Explain like I am 5.md",
     "copilot/copilot-custom-prompts",
     "copilot",
     "New Text Document.txt",

@@ -1,7 +1,7 @@
 ---
 name: Rishap Pal
 relation: Topper who doesn't need to learn the concept.
-avatar_image: https://picsum.photos/seed/insert/400/400
+avatar_image: https://picsum.photos/seed/scolar/400/400
 related_posts:
   - friends
 category: friends
