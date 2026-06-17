@@ -6,6 +6,7 @@ export interface Post {
   id: string;
   title: string;
   slug: string;
+  filenameSlug?: string;
   created_at: string;
   content: string;
   cover_image?: string;
@@ -26,6 +27,7 @@ export interface Connection {
   name: string;
   slug: string;
   relation: string;
+  category?: string;
   avatar_image?: string;
   content: string;
   related_posts?: string[];
@@ -94,6 +96,7 @@ export function getAllPosts(): Post[] {
           id: String(attributes.slug || path),
           title: String(attributes.title || 'Untitled'),
           slug: String(attributes.slug || path.replace('../content/posts/', '').replace('.md', '')),
+          filenameSlug: path.split('/').pop()?.replace('.md', '') || '',
           created_at: String(attributes.date || new Date().toISOString()),
           content: String(body || ''),
           cover_image: coverImage,
@@ -136,6 +139,7 @@ export function getAllConnections(): Connection[] {
         name: String(attributes.name || 'Anonymous'),
         slug: String(attributes.slug || path.replace('../content/connections/', '').replace('.md', '')),
         relation: String(attributes.relation || ''),
+        category: attributes.category ? String(attributes.category) : 'Others',
         avatar_image: attributes.avatar_image ? String(attributes.avatar_image) : undefined,
         content: String(body || ''),
         related_posts: Array.isArray(attributes.related_posts) 

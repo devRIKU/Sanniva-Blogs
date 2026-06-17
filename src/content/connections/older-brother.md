@@ -5,6 +5,7 @@ avatar_image: https://picsum.photos/seed/brother/400/400
 related_posts:
   - my-cousins
   - anime
+category: cousins
 ---
 
 My older brother has been my role model and idol since childhood. He is the person who first introduced me to the world of computers, coding, and tech. Before I even knew what algebra was, he taught me the basics of Windows and the fundamentals of C++!

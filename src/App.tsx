@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Outlet, useLocation, useNavigate, useNavigationType } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ThemeProvider } from './context/ThemeContext';
 import Header from './components/Header';
@@ -25,13 +25,72 @@ function Layout() {
   const isConnectionPage = location.pathname.startsWith('/connection/');
   const isDrawerOpen = isAllPosts || isConnections;
   const isBaseHidden = isPostPage || isConnectionPage;
+  const navType = useNavigationType();
+  const scrollPositions = React.useRef<Record<string, number>>({});
   
+  const allBlogsRef = React.useRef<HTMLDivElement>(null);
+  const connectionsRef = React.useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    // Only scroll to top if we're not toggle-opening/closing drawers to preserve scroll
-    if (!isDrawerOpen) {
-      window.scrollTo(0, 0);
-    }
+    const handleScroll = () => {
+      // Only track window scroll if no drawers are open
+      if (!isDrawerOpen) {
+        scrollPositions.current[location.pathname] = window.scrollY;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [location.pathname, isDrawerOpen]);
+
+  useEffect(() => {
+    // Scroll management when not toggling drawers
+    if (!isDrawerOpen) {
+      if (navType === 'POP' || location.state?.restoreScroll) {
+        const savedScroll = scrollPositions.current[location.pathname] || 0;
+        // Wait for route's exit transition (0.15s) to complete, then scroll instantly
+        const timer = setTimeout(() => {
+          window.scrollTo(0, savedScroll);
+        }, 150);
+        return () => clearTimeout(timer);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }
+  }, [location.pathname, isDrawerOpen, navType, location.state]);
+
+  // Restore scroll for AllBlogs drawer
+  useEffect(() => {
+    if (isAllPosts && allBlogsRef.current) {
+      const savedScroll = scrollPositions.current['/all-posts'] || 0;
+      if (location.state?.restoreScroll) {
+        const timer = setTimeout(() => {
+          if (allBlogsRef.current) {
+            allBlogsRef.current.scrollTop = savedScroll;
+          }
+        }, 150);
+        return () => clearTimeout(timer);
+      } else {
+        allBlogsRef.current.scrollTop = 0;
+      }
+    }
+  }, [isAllPosts, location.state]);
+
+  // Restore scroll for Connections drawer
+  useEffect(() => {
+    if (isConnections && connectionsRef.current) {
+      const savedScroll = scrollPositions.current['/connections'] || 0;
+      if (location.state?.restoreScroll) {
+        const timer = setTimeout(() => {
+          if (connectionsRef.current) {
+            connectionsRef.current.scrollTop = savedScroll;
+          }
+        }, 150);
+        return () => clearTimeout(timer);
+      } else {
+        connectionsRef.current.scrollTop = 0;
+      }
+    }
+  }, [isConnections, location.state]);
 
   useEffect(() => {
     if (isDrawerOpen) {
@@ -43,6 +102,14 @@ function Layout() {
       document.body.style.overflow = '';
     };
   }, [isDrawerOpen]);
+
+  const handleAllBlogsScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    scrollPositions.current['/all-posts'] = e.currentTarget.scrollTop;
+  };
+
+  const handleConnectionsScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    scrollPositions.current['/connections'] = e.currentTarget.scrollTop;
+  };
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden bg-[var(--bg)]">
@@ -64,33 +131,43 @@ function Layout() {
 
       <main className="flex-grow grid grid-cols-1 grid-rows-1 relative">
         {/* Base Layer: Either Home page or full article/connection page */}
-        <motion.div 
-          key={isBaseHidden ? location.pathname : 'main-view'}
-          className="row-start-1 col-start-1 h-full w-full bg-[var(--bg)] origin-center"
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ 
-            opacity: 1,
-            y: 0,
-            scale: isDrawerOpen ? 0.95 : 1,
-            filter: isDrawerOpen ? 'brightness(0.65)' : 'brightness(1)',
-            borderRadius: isDrawerOpen ? '24px' : '0px',
-          }}
-          transition={{ 
-            opacity: { duration: 0.25, ease: "easeInOut" },
-            y: { duration: 0.25, ease: "easeInOut" },
-            scale: { type: "spring", stiffness: 300, damping: 30 },
-            filter: { duration: 0.3 },
-            borderRadius: { duration: 0.3 }
-          }}
-        >
-          {/* Render Home directly to prevent unmounting and re-triggering entry animations */}
-          {isBaseHidden ? <Outlet /> : <Home />}
-        </motion.div>
+        <AnimatePresence mode="popLayout">
+          {(() => {
+            const viewKey = isBaseHidden ? location.pathname : 'main-view';
+            return (
+              <motion.div 
+                key={viewKey}
+                className="row-start-1 col-start-1 h-full w-full bg-[var(--bg)] origin-center"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ 
+                  opacity: 1,
+                  y: 0,
+                  scale: isDrawerOpen ? 0.95 : 1,
+                  filter: isDrawerOpen ? 'brightness(0.65)' : 'brightness(1)',
+                  borderRadius: isDrawerOpen ? '24px' : '0px',
+                }}
+                exit={{ opacity: 0, transition: { duration: 0.15 } }}
+                transition={{ 
+                  opacity: { duration: 0.25, ease: "easeInOut" },
+                  y: { duration: 0.25, ease: "easeInOut" },
+                  scale: { type: "spring", stiffness: 300, damping: 30 },
+                  filter: { duration: 0.3 },
+                  borderRadius: { duration: 0.3 }
+                }}
+              >
+                {/* Render Home directly to prevent unmounting and re-triggering entry animations */}
+                {viewKey === 'main-view' ? <Home /> : <Outlet />}
+              </motion.div>
+            );
+          })()}
+        </AnimatePresence>
 
         {/* Side-Drawer Overlay Panel for All Blogs */}
         <AnimatePresence>
           {isAllPosts && (
             <motion.div
+              ref={allBlogsRef}
+              onScroll={handleAllBlogsScroll}
               initial={{ x: '100%', opacity: 0.9 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: '100%', opacity: 0.9 }}
@@ -113,6 +190,8 @@ function Layout() {
         <AnimatePresence>
           {isConnections && (
             <motion.div
+              ref={connectionsRef}
+              onScroll={handleConnectionsScroll}
               initial={{ x: '100%', opacity: 0.9 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: '100%', opacity: 0.9 }}

@@ -18,6 +18,19 @@ export default function Post() {
   const prevPost = currentIndex !== -1 && currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
   const nextPost = currentIndex !== -1 && currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 
+  const getTitleSizeClass = (title: string) => {
+    const len = title.length;
+    if (len <= 15) {
+      return 'text-5xl sm:text-6xl md:text-7xl lg:text-8xl';
+    } else if (len <= 30) {
+      return 'text-4xl sm:text-5xl md:text-6xl lg:text-7xl';
+    } else if (len <= 55) {
+      return 'text-4xl sm:text-5xl md:text-6xl';
+    } else {
+      return 'text-3xl sm:text-4xl md:text-5xl';
+    }
+  };
+
   const processedContent = React.useMemo(() => {
     if (!post) return '';
     return post.content
@@ -43,11 +56,18 @@ export default function Post() {
           return `[${display}](${target})`;
         }
         
-        // Otherwise, assume it's an internal post link and convert to slug
-        const slug = target.toLowerCase().replace(/\s+/g, '-');
-        return `[${display}](/post/${slug})`;
+        // Resolve target to actual post slug if possible
+        const targetNormalized = target.toLowerCase().replace(/\s+/g, '-');
+        const foundPost = allPosts.find(p => 
+          p.slug.toLowerCase() === targetNormalized ||
+          (p.filenameSlug && p.filenameSlug.toLowerCase() === targetNormalized) ||
+          p.title.toLowerCase() === target.toLowerCase()
+        );
+        const resolvedSlug = foundPost ? foundPost.slug : targetNormalized;
+        
+        return `[${display}](/post/${resolvedSlug})`;
       });
-  }, [post]);
+  }, [post, allPosts]);
 
   if (!post) {
     return (
@@ -63,7 +83,7 @@ export default function Post() {
 
   return (
     <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12 sm:pt-8 md:pt-12">
-      <Link to="/" className="inline-flex items-center text-[var(--secondary)] hover:text-[var(--accent)] transition-colors mb-4 sm:mb-6 md:mb-8 font-mono text-sm uppercase tracking-wider">
+      <Link to="/" state={{ restoreScroll: true }} className="inline-flex items-center text-[var(--secondary)] hover:text-[var(--accent)] transition-colors mb-4 sm:mb-6 md:mb-8 font-mono text-sm uppercase tracking-wider">
         <ArrowLeft className="mr-2" size={16} /> Back
       </Link>
 
@@ -86,7 +106,7 @@ export default function Post() {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="mb-10"
       >
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-[var(--text)] leading-tight mb-6">
+        <h1 className={`${getTitleSizeClass(post.title)} font-display font-bold text-[var(--text)] leading-tight mb-6`}>
           {post.title}
         </h1>
         <div className="flex items-center justify-between border-y border-[var(--border)] py-4 font-mono text-sm text-[var(--secondary)] uppercase tracking-wider">

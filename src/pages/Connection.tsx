@@ -47,7 +47,7 @@ export default function Connection() {
 
   return (
     <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12 sm:pt-8 md:pt-12">
-      <Link to="/connections" className="inline-flex items-center text-[var(--secondary)] hover:text-[var(--accent)] transition-colors mb-4 sm:mb-6 md:mb-8 font-mono text-sm uppercase tracking-wider">
+      <Link to="/connections" state={{ restoreScroll: true }} className="inline-flex items-center text-[var(--secondary)] hover:text-[var(--accent)] transition-colors mb-4 sm:mb-6 md:mb-8 font-mono text-sm uppercase tracking-wider">
         <ArrowLeft className="mr-2" size={16} /> Back to Connections
       </Link>
 

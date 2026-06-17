@@ -8,12 +8,10 @@ import { getAllPosts, getSettings, Post, Settings } from '../utils/content';
 let hasPlayedEntryAnimation = false;
 
 export default function Home() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [settings, setSettings] = useState<Settings | null>(null);
+  const [posts] = useState<Post[]>(() => getAllPosts());
+  const [settings] = useState<Settings | null>(() => getSettings());
 
   useEffect(() => {
-    setPosts(getAllPosts());
-    setSettings(getSettings());
     hasPlayedEntryAnimation = true;
   }, []);
 
