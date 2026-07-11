@@ -7,7 +7,7 @@ featured: true
 tags:
   - thoughts
   - art
-cover_image: https://picsum.photos/id/37/2000/1333
+cover_image: https://picsum.photos/id/38/1280/960
 ---
 I want to start this blog with a question: 
 

@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "cec8a13999785c4a",
+        "id": "c6777bdf39a1ab70",
         "type": "tabs",
         "children": [
           {
-            "id": "60de43fcaa6fde9a",
+            "id": "97887fadbf5ed700",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -204,10 +204,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "60de43fcaa6fde9a",
+  "active": "97887fadbf5ed700",
   "lastOpenFiles": [
-    "posts/anime.md",
     "posts/why-art.md",
+    "posts/anime.md",
     "posts/last-day-before-exam.md",
     "posts/harry-potter.md",
     "posts/friends.md",
