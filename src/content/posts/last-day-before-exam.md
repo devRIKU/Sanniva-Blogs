@@ -3,7 +3,7 @@ title: Last Day Before The Finals
 slug: last-day-before-exam
 date: 2026-02-15
 status: Published
-featured: true
+featured: false
 tags:
   - thoughts
   - lifestyle
