@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "posts/friends.md",
+                "file": "connections/Arghyadip.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "friends"
+              "title": "Arghyadip"
             }
           }
         ],
@@ -220,9 +220,11 @@
   },
   "active": "26868bff8327daa6",
   "lastOpenFiles": [
-    "connections/best-friend.md",
     "posts/friends.md",
+    "connections/Rudra.md",
+    "connections/Shreyan.md",
     "connections/Arghyadip.md",
+    "connections/best-friend.md",
     "connections/Ankush.md",
     "connections/Ayushi.md",
     "connections/Rishap.md",
@@ -244,9 +246,7 @@
     "rainy-day-code.md",
     "a-new-series.md",
     "Extras/Templates/a-new-blog.md",
-    "conflict-files-obsidian-git.md",
     "Untitled.base",
-    "Extras/Templates/Blog Template.md",
     "Screenshot 2026-04-04 at 10-40-15 Runescribe Infinite Supernatural Adventures.png",
     "copilot/copilot-custom-prompts",
     "copilot",

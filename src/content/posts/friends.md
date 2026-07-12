@@ -16,6 +16,9 @@ In Gujarat, where I spent my growing years (from age 6 to 9), I made many friend
 
 After changing schools, I was left completely stranded with no one who knew me. But even on the first day, I was met with such warmth and kindness from everyone there that I slowly gathered my friends. I made a best friend, and over time, I even found a group of people who accepted my weird quirks without judging me for them. Slowly, they became my source of happiness and laughter. We named ourselves the "Fantastic Six" squad, consisting of me, [Ankush](https://blog-sanniva.vercel.app/connection/Ankush), [Ayushi](https://blog-sanniva.vercel.app/connection/Ayushi), Mohil, Debadri, and [Rishap](https://blog-sanniva.vercel.app/connection/Rishap). Beyond that group, I made an effort to befriend as many people as I could; this is why I count both the backbenchers and the top students, myself included btw, among my friends. My best friend, [Ujan](https://blog-sanniva.vercel.app/connection/best-friend), just had something that instantly vibed with me. He’s extremely talented at chess, but he’s an even better person to talk to. He might be the one who’s put up with my continuous singing the most, and he still doesn't tell me to shut up or anything.
 
-Also not to mention there is [Arghyadip](https://blog-sanniva.vercel.app/connection/Arghyadip)... Who betrayed me once... and i betrayed him once...
+Not to mention [Arghyadip](https://blog-sanniva.vercel.app/connection/Arghyadip)... He was absolutely my guy for the longest time, then we fought over a totally important and serious matter. I thought I would never speak to him again, but... well, something changed over summer break and our friendship started to heal.
+
+Other than them i also have my Car buddies, [Shreyan](https://blog-sanniva.vercel.app/connection/Shreyan), Virat and recently Rushil, they are quite supportive and would care about you even in your darkest times...
+
 
 > This is not finished so come back later!
